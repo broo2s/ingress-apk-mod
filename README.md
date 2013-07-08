@@ -8,37 +8,37 @@ Unfortunately it's not that easy to build it from sources, because it was develo
 Features
 --------
 
-- new items screen: clean design, quick access, items counters
-- support for HVGA and QVGA screens
-- muted version of an app - it's a lot smaller
-- UI tweaks:
-    - skip globe intro anim
-    - disable scanner zoom in anim - it's GPU consuming and delays portal dialog opening
-    - disable vectors to portals
-    - disable portal particles (XM "fountain" above portals)
-    - revert to old hack anim
-- real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
-- keys number on portal info screen
-- option to hide unwanted menu tabs
-- option to deploy resonators from highest to lowest
-- fullscreen mode
+- New items screen: Clean Design, Quick Access, Items Counters
+- Support for HVGA and QVGA screens
+- Muted version of the app - it's a lot smaller
+- UI Tweaks:
+    - Skip globe introduction animimation
+    - Disable scanner zoom in animination - it's GPU consuming and delays portal dialog opening
+    - Disable vectors to portals
+    - Disable portal particles (XM "fountain" above portals)
+    - Revert to old hack animation
+- Real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
+- Number of keys for selected portal on info screen
+- Option to hide unwanted menu tabs
+- Option to deploy resonators from highest to lowest
+- Fullscreen mode
 
 Other features:
 
-- automatically identifies obfuscated names using declarative-style configuration
-- easily deploy multiple UI variants (e.g. different themes) within one apk file
-- simulator of UI components
-- texture unpacker - separate individual images from *.atlas and related png files
+- Automatically identifies obfuscated names using declarative-style configuration
+- Easily deploy multiple UI variants (e.g. different themes) within one apk file
+- Simulator of UI components
+- Texture unpacker - separate individual images from *.atlas and related png files
 
 News
 ----
 
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
-- initial version
+- Initial Version
 
 
-Quick build instructions
+Quick Build Instructions
 ------------------------
 
 1. Import Ingress apk using import_apk.py script. Names analyzer will be called automatically.
