@@ -28,6 +28,8 @@ broot.ingress.mod.Entry:
     PortalUpgrade_onDispose: [null, V]
     PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
+    InventoryItemRenderer_shouldRotate: [null, Z]
+    InventoryItemRenderer_simplifyItems: [null, Z]
 
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]
@@ -417,6 +419,13 @@ com.nianticproject.ingress.common.inventory.ui.ItemDisplayNameUtils:
     getDisplayDescription: [b, $GameEntity]
 
   find_by_string: 'Not a resource: %s'
+
+com.nianticproject.ingress.common.inventory.ui.InventoryItemRenderer:
+  methods:
+    rotate: [a, Z, F]
+
+  obf_name: com.nianticproject.ingress.common.inventory.ui.ar
+
 
 com.nianticproject.ingress.common.inventory.ui.IndistinguishableItems:
   methods:

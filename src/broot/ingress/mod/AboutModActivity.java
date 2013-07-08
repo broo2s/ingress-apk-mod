@@ -115,6 +115,13 @@ public class AboutModActivity extends BaseSubActivity {
                         updateAnimsValues(true);
                     }
                 });
+                animsItem.addButton("Item rotation", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.rotateInventoryItemsEnabled = !Config.rotateInventoryItemsEnabled;
+                        updateAnimsValues(true);
+                    }
+                });
                 addItem(animsItem);
 
                 uiTweaksItem = new ListItem(skin, "UI tweaks", null);
@@ -146,6 +153,13 @@ public class AboutModActivity extends BaseSubActivity {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         Config.scannerObjectsEnabled = !Config.scannerObjectsEnabled;
+                        updateUiTweaksValues(true);
+                    }
+                });
+                uiTweaksItem.addButton("Simplify Items", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.simplifyInventoryItems = !Config.simplifyInventoryItems;
                         updateUiTweaksValues(true);
                     }
                 });
@@ -233,6 +247,7 @@ public class AboutModActivity extends BaseSubActivity {
         animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
         animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
         animsItem.buttons.get(2).setText(Config.newHackAnimEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
     }
 
     private void updateUiTweaksValues(boolean save) {
@@ -243,6 +258,7 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(1).setText(Config.showPortalVectors ? "ON" : "OFF");
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
+        uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
     }
 
     private void updateUiVariantValue() {

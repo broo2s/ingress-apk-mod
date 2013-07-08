@@ -185,6 +185,23 @@ def main():
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewHackAnimations', 'v0', 'v0')
     edit.save()
 
+    #stop inventory item rotation
+    edit = edit_cls('InventoryItemRenderer')
+    edit.prepare_after_prologue('rotate')
+    edit.add_invoke_entry('InventoryItemRenderer_shouldRotate', ret='v0')
+    edit.add_ret_if_result(False, 'result')
+    edit.save()
+
+    #simplify inventory item rendering
+    edit = edit_cls('InventoryItemRenderer')
+    edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*')
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('InventoryItemRenderer_simplifyItems', ret='v0')
+    edit.add_line('if-nez v0, :skip_item_shader')
+    edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*', where='down')
+    edit.prepare_to_insert()
+    edit.add_line(':skip_item_shader')
+    edit.save()
 
 if __name__ == '__main__':
     main()

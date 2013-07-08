@@ -19,12 +19,14 @@ public class Config {
     public static boolean skipIntro;
     public static boolean scannerZoomInAnimEnabled;
     public static boolean newHackAnimEnabled;
+    public static boolean rotateInventoryItemsEnabled;
 
     public static boolean fullscreen;
     public static boolean showPortalVectors;
     public static boolean portalParticlesEnabled;
     public static boolean xmGlobsEnabled;
     public static boolean scannerObjectsEnabled;
+    public static boolean simplifyInventoryItems;
 
     public static UiVariant uiVariant;
 
@@ -43,12 +45,14 @@ public class Config {
         skipIntro = prefs.getBoolean("skipIntro", false);
         scannerZoomInAnimEnabled = prefs.getBoolean("scannerZoomInAnimEnabled", true);
         newHackAnimEnabled = prefs.getBoolean("newHackAnimEnabled", true);
+        rotateInventoryItemsEnabled = prefs.getBoolean("rotateInventoryItemsEnabled", true);
 
         fullscreen = prefs.getBoolean("fullscreen", false);
         showPortalVectors = prefs.getBoolean("showPortalVectors", true);
         portalParticlesEnabled = prefs.getBoolean("portalParticlesEnabled", true);
         xmGlobsEnabled = prefs.getBoolean("xmGlobsEnabled", true);
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
+        simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
@@ -73,12 +77,14 @@ public class Config {
         e.putBoolean("skipIntro", skipIntro);
         e.putBoolean("scannerZoomInAnimEnabled", scannerZoomInAnimEnabled);
         e.putBoolean("newHackAnimEnabled", newHackAnimEnabled);
+        e.putBoolean("rotateInventoryItemsEnabled", rotateInventoryItemsEnabled);
 
         e.putBoolean("fullscreen", fullscreen);
         e.putBoolean("showPortalVectors", showPortalVectors);
         e.putBoolean("portalParticlesEnabled", portalParticlesEnabled);
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
+        e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
 
         e.putString("uiVariant", uiVariant.name);
 
