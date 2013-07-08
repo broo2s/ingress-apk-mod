@@ -1,0 +1,16 @@
+version: 1.0.0
+
+signing:
+  debug:
+    store: $MOD_HOME/res/ingress-mod.keystore
+    pass: qwerty
+    alias: ingress_mod
+
+  release:
+    store: $MOD_HOME/res/ingress-mod.keystore
+    pass: qwerty
+    alias: ingress_mod
+
+maps_key:
+  debug: AIzaSyDnBplgAJZudNKNy7n2xwfvcHnrZuVVGsk
+  release: AIzaSyDnBplgAJZudNKNy7n2xwfvcHnrZuVVGsk

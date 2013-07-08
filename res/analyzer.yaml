@@ -1,0 +1,610 @@
+### MOD
+
+broot.ingress.mod.Entry:
+  is_real_name: true
+
+  methods:
+    NemesisApp_onOnCreate: [null, V, Landroid/app/Application;]
+    NemesisActivity_onOnCreate: [null, V, $NemesisActivity]
+    NemesisWorld_onInit: [null, V, $NemesisWorld]
+    SubActivityManager_onInit: [null, V, Ljava/util/List;]
+    MenuController_onInit: [null, V, $MenuControllerImpl]
+    AssetFinder_onInit: [null, V, $AssetFinder]
+
+    SubActiityApplicationLisener_onCreated: [null, V]
+
+    MenuShowBtn_onClick: [null, Ljava/lang/Class;]
+    MenuTopWidget_getTabs: [null, '$MenuTabId[]']
+    MenuTabId_onToString: [null, $String, $MenuTabId]
+    MenuControllerImpl_onSelectTab: [null, V, $MenuTabId]
+    AssetFinder_onGetAssetPath: [null, Lcom/badlogic/gdx/files/FileHandle;, $String]
+    PortalInfoDialog_onStatsTableCreated: [null, V, $PortalInfoDialog, $Table]
+    PortalInfoDialog_onPlayerLocationChanged: [null, V]
+    ScannerStateManager_onEnablePortalVectors: [null, Z]
+    PlayerModelUtils_onGetDefaultResonatorToDeploy: [null, Ljava/util/Map;, Ljava/util/TreeMap;]
+    ZoomInMode_shouldZoomIn: [null, Z]
+    PortalInfoDialog_getOpenDelay: [null, F, F]
+    PortalUpgrade_onStatsTableCreated: [null, V, $PortalUpgradeUi, $Table]
+    PortalUpgrade_onDispose: [null, V]
+    PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
+    ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
+
+    getClientType: [null, $ClientType]
+    getClientTypeForJackson: [null, $ClientType]
+    shouldSkipIntro: [null, Z]
+    shouldDrawScannerObject: [null, Z]
+
+### MODEL
+
+com.nianticproject.ingress.common.model.PlayerModel:
+  methods:
+    getPlayerLocation: [g, $PlayerLocation]
+    addListener: [a, V, $PlayerListener]
+    removeListener: [b, V, $PlayerListener]
+
+  find_interface_of: $PlayerModelImpl
+
+com.nianticproject.ingress.common.model.PlayerModelImpl:
+  super: $PlayerModel
+  find_by_string: PlayerModel\.notify
+
+com.nianticproject.ingress.common.model.PlayerListener:
+  methods:
+    getName: [a, $String]
+    onLocationChanged: [a, V, $PlayerLocation]
+
+  find:
+    - [by_method, false, true, getName, public abstract]
+    - [by_method, false, true, onLocationChanged, public abstract]
+
+com.nianticproject.ingress.common.model.BasePlayerListener:
+  super: $PlayerListener
+  find_by_implements: $PlayerListener
+
+### ENTITY
+
+com.nianticproject.ingress.gameentity.GameEntity:
+  is_real_name: true
+
+com.nianticproject.ingress.gameentity.EntityComponent:
+  obf_name: com.nianticproject.ingress.gameentity.a
+
+com.nianticproject.ingress.common.gameentity.PlayerModelUtils:
+  methods:
+    getDefaultResonatorToDeploy: [a, $GameEntity, $PlayerModel, Lcom/nianticproject/ingress/gameentity/components/Portal;]
+
+  find_by_method: getDefaultResonatorToDeploy
+
+com.nianticproject.ingress.gameentity.components.ItemRarity:
+  is_enum: true
+  find_by_string: EXTREMELY_RARE
+
+com.nianticproject.ingress.gameentity.components.FlipCardType:
+  is_enum: true
+  find_by_string: ADA Refactor
+
+### SHARED
+
+com.nianticproject.ingress.shared.ItemType:
+  is_enum: true
+  find_by_string: EMITTER_A
+
+com.nianticproject.ingress.shared.Faction:
+  is_enum: true
+  find_by_string: '"Enlightened"'
+
+com.nianticproject.ingress.shared.ClientType:
+  is_enum: true
+  find_by_string: BETASPIKE
+
+com.nianticproject.ingress.shared.Setup:
+  fields:
+    CLIENT_TYPE: [a, $ClientType]
+
+  find_by_field: [CLIENT_TYPE, public static final]
+
+com.nianticproject.ingress.common.PlayerLocation:
+  fields:
+    latLng: [a, $S2LatLng]
+
+  methods:
+    getLatLng: [a, $S2LatLng]
+
+  find_by_field: [latLng, private final]
+
+com.nianticproject.ingress.shared.location.LocationUtils:
+  methods:
+    calculateDistance: [a, D, $S2LatLng, $S2LatLng]
+
+  find:
+    - [by_string, false, true, 0x41584db080000000L]
+    - [by_string, false, true, 0x40fb21d000000000L]
+
+com.nianticproject.ingress.knobs.ClientFeatureKnobBundle:
+  fields:
+    enableNewHackAnimations: [enableNewHackAnimations, Z]
+
+  is_real_name: true
+
+### MISC
+
+com.nianticproject.ingress.common.json.JacksonInitializer:
+  find_by_string: 'Lorg/codehaus/jackson/map/ObjectMapper;->configure\('
+
+### APP
+
+com.nianticproject.ingress.NemesisApplication:
+  is_real_name: true
+
+  methods:
+    onCreate: [onCreate, V]
+
+com.nianticproject.ingress.NemesisActivity:
+  is_real_name: true
+
+  methods:
+    onCreate: [onCreate, V, Landroid/os/Bundle;]
+
+com.nianticproject.ingress.common.app.NemesisWorld:
+  methods:
+    getPlayerModel: [b, $PlayerModel]
+    getSubActivityManager: [n, $SubActivityManager]
+
+  find_by_string: NemesisWorld\.init
+
+com.nianticproject.ingress.common.app.NemesisCache:
+  methods:
+    getInventory: [e, Ljava/util/Collection;]
+    getInventorySize: [f, I]
+    addInventoryListener: [a, $InventoryListener]
+    removeInventoryListener: [b, $InventoryListener]
+    addGameStateListener: [a, $GameStateListener]
+    removeGameStateListener: [b, $GameStateListener]
+
+  find_interface_of: $NemesisMemoryCache
+
+com.nianticproject.ingress.common.app.NemesisMemoryCache:
+  find_by_string: NemesisMemoryCache
+
+com.nianticproject.ingress.common.app.NemesisMemoryCacheFactory:
+  methods:
+    getCache: [a, $NemesisCache]
+
+  find_by_method: getCache
+
+### RESOURCES
+
+com.nianticproject.ingress.common.assets.AssetFinder:
+  fields:
+    screenDensity: [a, $ScreenDensity]
+
+  find_by_string: getAssetPath
+
+com.nianticproject.ingress.common.assets.ScreenDensity:
+  is_enum: true
+  find_by_string: XHIGH
+
+com.nianticproject.ingress.common.audio.AudioSystemManager:
+  find_by_string: AudioSystemManager
+
+### GFX
+
+com.nianticproject.ingress.common.gfx1.GroupDrawer:
+  find_by_string: Unexpected exception in draw.
+
+com.nianticproject.ingress.common.gfx1.Drawer:
+  find_interface_of: $GroupDrawer
+
+com.nianticproject.ingress.common.gfx1.CameraControls:
+  find_by_string: Camera has been revoked
+
+### RPC
+
+com.nianticproject.ingress.common.rpc.InventoryListener:
+  obf_name: com.nianticproject.ingress.common.f.g
+  methods:
+    onInventoryChanged: [a, V]
+
+com.nianticproject.ingress.common.rpc.GameStateListener:
+  obf_name: com.nianticproject.ingress.common.f.f
+  methods:
+    onGameStateChanged: [a, V]
+
+### UI
+
+com.nianticproject.ingress.common.ui.UiLayer:
+  methods:
+    createUi: [a, V, $Skin, $Stage]
+    dontDispose: [a, Z, F]
+    dispose: [dispose, V]
+
+  find_interface_of: $DeviceActivityUi
+
+com.nianticproject.ingress.common.ui.UiRenderer:
+  methods:
+    addUiLayer: [a, V, $UiLayer]
+
+  find_by_string: UiRenderer
+
+com.nianticproject.ingress.common.ui.mode.UiMode:
+  methods:
+    onEnter: [a, V, $CameraControls]
+    onExit: [a, V]
+
+  find_interface_of: $ZoomInMode
+
+com.nianticproject.ingress.common.ui.mode.UiModeManager:
+  find_by_string: Top mode died.
+
+com.nianticproject.ingress.common.ui.FormatUtils:
+  methods:
+    getColorForLevel: [a, Lcom/badlogic/gdx/graphics/Color;, $Skin, I]
+    getColorForRarity: [a, Lcom/badlogic/gdx/graphics/Color;, $Skin, $ItemRarity]
+    formatDistance: [a, $String, F]
+
+  find_by_string: '%dkm'
+
+### SUB ACTIVIVITY
+
+com.nianticproject.ingress.common.ui.SubActivity:
+  find_interface_of: $BaseSubActivity
+
+com.nianticproject.ingress.common.ui.SubActivityState:
+  find_by_string: onEnterForeground
+
+com.nianticproject.ingress.common.ui.SubActivityManager:
+  fields:
+    skin: [i, $Skin]
+
+  methods:
+    init: [<init>, V, $SubActivity, Ljava/lang/Iterable;]
+    getSubActivity: [a, $SubActivity, Ljava/lang/Class;]
+    getForegroundActivity: [b, $SubActivity]
+    replaceForegroundActivity: [d, $SubActivity, Ljava/lang/Class;]
+
+  find_by_string: SubActivityManager
+
+com.nianticproject.ingress.common.ui.BaseSubActivity:
+  methods:
+    getName: [d, $String]
+    getRenderer: [H, $UiRenderer]
+    onResume: [a, V]
+    onPause: [e, V]
+
+  find_super_of: $DeviceActivity
+
+com.nianticproject.ingress.common.ui.SubActivityApplicationListener:
+  methods:
+    create: [create, V]
+
+  find_by_string: SubActivityApplicationListener
+
+com.nianticproject.ingress.common.ui.LabelButtonActivity:
+  find_super_of: $RecruitActivity
+
+com.nianticproject.ingress.common.ui.LabelButtonActivityUi:
+  find_multi_by_implements: $UiLayer
+  find_multi_by_string: default
+
+### MENU
+
+com.nianticproject.ingress.common.ui.widget.MenuTabId:
+  is_enum: true
+
+  methods:
+    getText2: [a, $String]
+
+  find_by_string: RECRUIT
+
+com.nianticproject.ingress.common.ui.elements.MenuShowBtn:
+  find_by_string: $ItemsActivity
+
+com.nianticproject.ingress.common.ui.widget.MenuTabClickListener:
+  fields:
+    tabId: [a, $MenuTabId]
+    table: [b, $MenuTopWidget]
+
+  find:
+    - [by_super, false, true, Lcom/badlogic/gdx/scenes/scene2d/utils/ClickListener;]
+    - [by_field, false, true, tabId]
+    - [by_field, false, true, table]
+
+com.nianticproject.ingress.common.ui.widget.MenuController:
+  methods:
+    selectTab: [a, V, $MenuTabId]
+
+  find_multi_interface_of: $MenuControllerImpl
+  find_multi_by_method: selectTab
+
+com.nianticproject.ingress.common.ui.widget.MenuTopWidget:
+  methods:
+    init: [<init>, $Skin, I, $MenuController, $MenuTabId]
+    createTabs: [a, V]
+
+  find_by_string: ops-scroll-indicator-left
+
+com.nianticproject.ingress.common.ui.widget.MenuScrollLabel:
+  find_by_super: Lcom/nianticproject/ingress/common/ui/widget/ScrollLabel;
+
+### SCANNER
+
+com.nianticproject.ingress.common.scanner.ScannerActivity:
+  find_by_string: '"ScannerActivity"'
+
+com.nianticproject.ingress.common.scanner.PortalKeyScannerActivity:
+  find_by_string: PortalKeyScannerActivity
+
+com.nianticproject.ingress.common.scanner.ScannerStateManager:
+  methods:
+    disablePortalVectors: [a, V, $ScannerStateManager]
+    enablePortalVectors: [b, V, $ScannerStateManager]
+
+  find_by_string: STATE_NO_PORTALS
+
+com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
+  fields:
+    enabled: [a, Z]
+
+  find_by_string: Portal Particle Render
+
+#com.nianticproject.ingress.common.scanner.render.EnergyGlobVisuals:
+#  fields:
+#    initEnabled: [a, Z]
+#
+#  methods:
+#    toggle: [b, V]
+#
+#  find_by_string: '"EnergyGlobVisuals.draw"'
+
+com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
+  find_by_string: ScannerDestinationVisuals
+
+com.nianticproject.ingress.common.scanner.modes.ZoomInMode:
+  super: $UiMode
+  find_super_of: $PortalDialogMode
+
+com.nianticproject.ingress.common.scanner.modes.PortalDialogMode:
+  super: $ZoomInMode
+  find_by_string: new-instance [pv]\d+, ${PortalInfoDialog}
+
+com.nianticproject.ingress.common.ui.elements.PortalInfoDialog:
+  super: $UiLayer
+
+  fields:
+    portalComponent: [r, Lcom/nianticproject/ingress/gameentity/components/Portal;]
+
+  methods:
+    onPlayerLocationChanged: [n, V]
+
+  find_by_string: PortalInfoDialog\.createResources
+
+com.nianticproject.ingress.common.scanner.modes.RepeatedActionUi:
+  super: $UiLayer
+  methods:
+    onPrimaryAction: [a, V]
+    onDone: [b, V]
+  find:
+    - [by_string, false, true, DONE]
+    - [by_string, false, true, primary-action]
+
+### PORTAL UPGRADE
+
+com.nianticproject.ingress.common.upgrade.PortalUpgradeActivity:
+  fields:
+    portalEntity: [j, $GameEntity]
+  find_by_string: '"UpgradePortalActivity"'
+
+com.nianticproject.ingress.common.upgrade.PortalUpgradeUi:
+  super: $UiLayer
+  fields:
+    activity: [a, $PortalUpgradeActivity]
+  find_by_string: portal-details-stats
+
+com.nianticproject.ingress.common.upgrade.ResonatorBrowser:
+  find_by_string: resonatorBrowser
+
+### INVENTORY
+
+com.nianticproject.ingress.common.inventory.ItemsActivity:
+  find_by_string: InventoryGl
+
+com.nianticproject.ingress.common.inventory.ui.ItemsActivityUi:
+  find_by_string: PortalLinkKeys
+
+com.nianticproject.ingress.common.inventory.ui.ItemDisplayNameUtils:
+  methods:
+    getDisplayName: [a, $GameEntity]
+    getDisplayDescription: [b, $GameEntity]
+
+  find_by_string: 'Not a resource: %s'
+
+com.nianticproject.ingress.common.inventory.ui.IndistinguishableItems:
+  methods:
+    getType: [a, $ItemType]
+    getLevel: [e, I]
+    getRarity: [d, $ItemRarity]
+    getCount: [g, I]
+    getEntity: [h, $GameEntity]
+
+    fromItemsByPlayerInfo: [a, Ljava/util/List;, $PlayerModel, Ljava/util/Collection;]
+
+  find_by_string: IndistinguishableItems
+
+com.nianticproject.ingress.common.inventory.ui.ItemsMenuController:
+  methods:
+    showItemDetails: [a, V, $GameEntity]
+  
+  find_multi_interface_of: $MenuControllerImpl
+  find_multi_by_method: showItemDetails
+
+com.nianticproject.ingress.common.inventory.MenuControllerImpl:
+  super: [$MenuController, $ItemsMenuController]
+
+  find_by_string: $SubActivityManager->replaceForegroundActivity()
+
+# ITEM DETAILS
+
+com.nianticproject.ingress.common.inventory.ItemDetailsActivity:
+  find_by_string: ItemDetailsActivity
+
+com.nianticproject.ingress.common.inventory.ui.ItemDetailsActivityUi:
+  find_by_string: act_container
+
+com.nianticproject.ingress.common.inventory.ui.ItemDetailsUiCreator:
+  methods:
+    addTop: [a, V, $Table, $Skin]
+    addAttrs: [a, V, $Table, $Skin, $Stage]
+    addDescription: [b, V, $Table, $Skin]
+    addActionButtons: [b, V, $Table, $Skin, $Stage]
+
+  find_interface_of: $BaseItemDetailsUiCreator
+
+com.nianticproject.ingress.common.inventory.ui.BaseItemDetailsUiCreator:
+  find:
+    - [by_string, false, true, '"DROP"']
+    - [by_string, false, true, '"RECYCLE"']
+
+com.nianticproject.ingress.common.inventory.ItemActionHandler:
+  methods:
+    drop: [a, V, $GameEntity]
+    recycle: [b, V, $GameEntity]
+    usePowerCube: [c, V, $GameEntity]
+    openMedia: [d, V, $GameEntity]
+    fireXmp: [e, V, $GameEntity]
+    useFlipCard: [f, V, $GameEntity]
+
+  find:
+    - [by_string, false, true, '0x4b0']
+    - [by_string, false, true, PowerCube]
+
+### SUB ACTIVITIES
+
+com.nianticproject.ingress.common.space2face.Space2FaceActivity:
+  find_by_string: Space2FaceActivity
+
+com.nianticproject.ingress.common.mission.ui.MissionScanner:
+  find_by_string: MissionScanner
+
+com.nianticproject.ingress.common.intel.IntelActivity:
+  find_by_string: IntelActivity
+
+com.nianticproject.ingress.common.intel.IntelActivityUi:
+  find_by_string: "Mind Units:"
+
+com.nianticproject.ingress.common.mission.MissionListActivity:
+  find_by_string: MissionListActivity
+
+com.nianticproject.ingress.common.mission.MissionListActivityUi:
+  find_by_string: View Briefing
+
+com.nianticproject.ingress.common.device.DeviceActivity:
+  find_by_string: DeviceActivity
+
+com.nianticproject.ingress.common.device.DeviceActivityUi:
+  find_by_string: Go to the help center
+
+com.nianticproject.ingress.common.recruit.RecruitActivity:
+  find_by_string: RecruitActivity
+
+### LIB
+
+com.google.common.geometry.S2LatLng:
+  methods:
+    latDegrees: [c, D]
+    lngDegrees: [f, D]
+
+  find_by_string: 0x415849c600000000L
+
+### LIBGDX
+
+com.badlogic.gdx.scenes.scene2d.ui.Table:
+  is_real_name: true
+
+com.badlogic.gdx.scenes.scene2d.ui.Skin:
+  is_real_name: true
+
+com.badlogic.gdx.scenes.scene2d.Stage:
+  is_real_name: true
+
+com.esotericsoftware.tablelayout.Cell:
+  obf_name: com.a.a.c
+
+  methods:
+    size: [a, $Cell, F]
+    size__1: [a, $Cell, $Value, $Value]
+    width: [a, $Cell, $Value]
+    width__1: [b, $Cell, F]
+    height: [b, $Cell, $Value]
+    height__1: [c, $Cell, F]
+    prefWidth: [c, $Cell, $Value]
+    maxWidth: [d, $Cell, F]
+
+    expand: [n, $Cell]
+    expandX: [o, $Cell]
+    expandY: [p, $Cell]
+
+    space: [d, $Cell, $Value]
+    space_2: [a, $Cell]
+    space_10: [e, $Cell]
+    spaceTop_3: [c, $Cell]
+    spaceLeft_10: [d, $Cell]
+
+    pad: [a, $Cell, F, F, F, F]
+    pad__1: [e, $Cell, F]
+    pad__2: [e, $Cell, $Value]
+    padTop: [f, $Cell, F]
+    padTop__1: [f, $Cell, $Value]
+    padLeft: [g, $Cell, F]
+    padLeft__1: [g, $Cell, $Value]
+    padBottom: [h, $Cell, F]
+    padBottom__1: [h, $Cell, $Value]
+    padRight: [i, $Cell, F]
+    padRight__1: [i, $Cell, $Value]
+
+    fill: [a, $Cell, Ljava/lang/Float;, Ljava/lang/Float;]
+    fill__1: [f, $Cell]
+    fillX: [g, $Cell]
+    fillY: [h, $Cell]
+
+    align: [a, $Cell, Ljava/lang/Integer;]
+    center: [i, $Cell]
+    top: [j, $Cell]
+    left: [k, $Cell]
+    bottom: [l, $Cell]
+    right: [m, $Cell]
+
+    colspan: [b, $Cell, Ljava/lang/Integer;]
+
+    getWidget: [a, Ljava/lang/Object;]
+    set: [a, V, $Cell]
+    getIgnore: [q, Z]
+    getWidgetX: [r, F]
+    getWidgetY: [s, F]
+    getWidgetWidth: [t, F]
+    getWidgetHeight: [u, F]
+
+com.esotericsoftware.tablelayout.Toolkit:
+  obf_name: com.a.a.d
+
+com.esotericsoftware.tablelayout.Value:
+  obf_name: com.a.a.e
+
+  methods:
+    percentWidth: [a, $Value, F]
+
+com.esotericsoftware.tablelayout.Value$Anon_PercentWidthTableValue:
+  obf_name: com.a.a.l
+  super: $Value$TableValue
+
+com.esotericsoftware.tablelayout.Value$FixedValue:
+  obf_name: com.a.a.o
+  super: $Value
+
+com.esotericsoftware.tablelayout.Value$TableValue:
+  obf_name: com.a.a.p
+  super: $Value
+
+### JAVA
+
+java.lang.String:
+  is_real_name: true

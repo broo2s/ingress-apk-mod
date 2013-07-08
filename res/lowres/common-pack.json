@@ -1,0 +1,6 @@
+{
+    stripWhitespaceX: true,
+    stripWhitespaceY: true,
+    filterMin: MipMapLinearNearest,
+    filterMag: Nearest,
+}

@@ -1,0 +1,10 @@
+@base.pg
+
+-dontshrink
+-dontoptimize
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,LocalVariable*Table,*Annotation*,Synthetic,EnclosingMethod
+
+-keep class broot.ingress.mod.** {
+    <fields>;
+    <methods>;
+}

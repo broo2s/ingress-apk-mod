@@ -1,0 +1,6 @@
+/build
+/dist
+/gen
+/smali/broot
+/assets/*/data-*
+*.iml

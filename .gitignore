@@ -1,0 +1,9 @@
+/app
+/build
+/gen
+/out
+/ingress-*.apk
+/lib
+/.idea
+/*.iml
+__pycache__
