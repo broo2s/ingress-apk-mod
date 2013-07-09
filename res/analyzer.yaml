@@ -31,6 +31,8 @@ broot.ingress.mod.Entry:
     InventoryItemRenderer_simplifyItems: [null, Z]
     ItemActionHandler_itemAnimationsEnabled: [null, Z]
 
+    uiHQ_XM: [null, Z]
+
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]
     shouldSkipIntro: [null, Z]
@@ -348,6 +350,11 @@ com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
     enabled: [a, Z]
 
   find_by_string: Portal Particle Render
+
+com.nianticproject.ingress.common.scanner.render.XMRenderer:
+  methods:
+    draw: [a, V, Lcom/badlogic/gdx/math/Matrix4;Lcom/nianticproject/ingress/common/j/c;Lcom/nianticproject/ingress/common/j/k;]
+  find_by_string: u_timeSec
 
 #com.nianticproject.ingress.common.scanner.render.EnergyGlobVisuals:
 #  fields:

@@ -215,5 +215,22 @@ def main():
     edit.add_line(':skip_item_shader')
     edit.save()
 
+    #xm rendering
+    edit = edit_cls('XMRenderer')
+    edit.find_method_def('draw')
+    edit.find_line(' const-string/jumbo v0, "u_texture"', where='down')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('uiHQ_XM', ret='v3')
+    edit.add_line('if-eqz v3, :skip_uniform_texture')
+    edit.find_line('.*ShaderProgram;->setUniform.*', where='down')
+    edit.prepare_to_insert()
+    edit.add_line(':skip_uniform_texture')
+    edit.find_line(' const-string/jumbo v0, "u_timeSec"', where='down')
+    edit.add_line('if-eqz v3, :skip_uniform_timesec')
+    edit.find_line('.*ShaderProgram;->setUniform.*', where='down')
+    edit.prepare_to_insert()
+    edit.add_line(':skip_uniform_timesec')
+    edit.save()
+
 if __name__ == '__main__':
     main()

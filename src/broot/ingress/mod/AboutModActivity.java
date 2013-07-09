@@ -27,6 +27,7 @@ public class AboutModActivity extends BaseSubActivity {
     private ListItem animsItem;
     private ListItem uiTweaksItem;
     private ListItem uiVariantItem;
+    private ListItem uiHQItem;
     private ListItem restartItem;
 
     public AboutModActivity() {
@@ -165,6 +166,18 @@ public class AboutModActivity extends BaseSubActivity {
                 });
                 addItem(uiTweaksItem);
 
+                uiHQItem = new ListItem(skin, "High Quality", null);
+                uiHQItem.addButton("XM", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.hqXM = !Config.hqXM;
+                        updateUiHQValues(true);
+                        restartItem.descLabel.setText("Restart is required");
+                    }
+                });
+                addItem(uiHQItem);
+
+
                 addItem(uiVariantItem = new ListItem(skin, "UI variant", "", "Toggle", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -217,6 +230,7 @@ public class AboutModActivity extends BaseSubActivity {
         updateTabsValues(false);
         updateAnimsValues(false);
         updateUiTweaksValues(false);
+        updateUiHQValues(false);
         updateUiVariantValue();
     }
 
@@ -259,6 +273,13 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
+    }
+
+    private void updateUiHQValues(boolean save) {
+        if (save) {
+            Config.save();
+        }
+        uiHQItem.buttons.get(0).setText(Config.hqXM ? "ON" : "OFF");
     }
 
     private void updateUiVariantValue() {

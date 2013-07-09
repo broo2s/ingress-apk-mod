@@ -187,6 +187,15 @@ public class Entry {
         return Config.itemAnimationsEnabled;
     }
 
+
+    private static Boolean uiHQ_XM_value = null;
+    public static boolean uiHQ_XM() {
+        if(uiHQ_XM_value == null) {
+          uiHQ_XM_value = Config.hqXM;
+        }
+        return uiHQ_XM_value;
+    }
+
     public static ClientType getClientType() {
         return ClientType.DEVELOPMENT;
     }

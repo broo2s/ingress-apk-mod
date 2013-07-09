@@ -28,6 +28,8 @@ public class Config {
     public static boolean scannerObjectsEnabled;
     public static boolean simplifyInventoryItems;
 
+    public static boolean hqXM;
+
     public static UiVariant uiVariant;
 
     public static void load() {
@@ -53,6 +55,8 @@ public class Config {
         xmGlobsEnabled = prefs.getBoolean("xmGlobsEnabled", true);
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
         simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
+
+        simplifyInventoryItems = prefs.getBoolean("hqXM", true);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
@@ -85,6 +89,8 @@ public class Config {
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
         e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
+
+        e.putBoolean("hqXM", hqXM);
 
         e.putString("uiVariant", uiVariant.name);
 
