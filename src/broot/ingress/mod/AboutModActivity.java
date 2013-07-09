@@ -115,10 +115,10 @@ public class AboutModActivity extends BaseSubActivity {
                         updateAnimsValues(true);
                     }
                 });
-                animsItem.addButton("Item rotation", "", new ClickListener() {
+                animsItem.addButton("Item animations", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.rotateInventoryItemsEnabled = !Config.rotateInventoryItemsEnabled;
+                        Config.itemAnimationsEnabled = !Config.itemAnimationsEnabled;
                         updateAnimsValues(true);
                     }
                 });
@@ -247,7 +247,7 @@ public class AboutModActivity extends BaseSubActivity {
         animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
         animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
         animsItem.buttons.get(2).setText(Config.newHackAnimEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(3).setText(Config.itemAnimationsEnabled ? "ON" : "OFF");
     }
 
     private void updateUiTweaksValues(boolean save) {

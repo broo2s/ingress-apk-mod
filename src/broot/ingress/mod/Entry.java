@@ -179,12 +179,12 @@ public class Entry {
         return orig && Config.newHackAnimEnabled;
     }
 
-    public static boolean InventoryItemRenderer_shouldRotate() {
-        return Config.rotateInventoryItemsEnabled;
-    }
-
     public static boolean InventoryItemRenderer_simplifyItems() {
         return Config.simplifyInventoryItems;
+    }
+
+    public static boolean ItemActionHandler_itemAnimationsEnabled() {
+        return Config.itemAnimationsEnabled;
     }
 
     public static ClientType getClientType() {

@@ -28,8 +28,8 @@ broot.ingress.mod.Entry:
     PortalUpgrade_onDispose: [null, V]
     PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
-    InventoryItemRenderer_shouldRotate: [null, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
+    ItemActionHandler_itemAnimationsEnabled: [null, Z]
 
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]

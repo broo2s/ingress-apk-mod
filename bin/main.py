@@ -178,7 +178,6 @@ def main():
     edit.add_invoke_entry('PortalUpgrade_getResonatorBrowserHeight', edit.vars[1], edit.vars[0])
     edit.save()
 
-
     edit = edit_cls('ClientFeatureKnobBundle')
     edit.find_line(r' iget-boolean v0, p0, %s' % expr('$ClientFeatureKnobBundle->enableNewHackAnimations'))
     edit.prepare_to_insert()
@@ -188,8 +187,21 @@ def main():
     #stop inventory item rotation
     edit = edit_cls('InventoryItemRenderer')
     edit.prepare_after_prologue('rotate')
-    edit.add_invoke_entry('InventoryItemRenderer_shouldRotate', ret='v0')
+    edit.add_invoke_entry('ItemActionHandler_itemAnimationsEnabled', ret='v0')
     edit.add_ret_if_result(False, 'result')
+    edit.save()
+
+    #remove recycle animation
+    edit = edit_cls('ItemActionHandler')
+    edit.find_method_def('recycle')
+    edit.find_line(' \.locals 4', where='down')
+    edit.replace_in_line('4', '5')
+    edit.find_line(' const-wide/16 v2, 0x4b0', where='down')
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ItemActionHandler_itemAnimationsEnabled', ret='v4')
+    edit.add_line(' if-nez v4, :lbl_recycle_delay');
+    edit.add_line(' const-wide/16 v2, 0x0')
+    edit.add_line(' :lbl_recycle_delay')
     edit.save()
 
     #simplify inventory item rendering
