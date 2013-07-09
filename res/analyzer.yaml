@@ -29,9 +29,13 @@ broot.ingress.mod.Entry:
     PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
+<<<<<<< HEAD
     ItemActionHandler_itemAnimationsEnabled: [null, Z]
 
     uiHQ_XM: [null, Z]
+=======
+    ShaderUtils_compileShader: [null, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
+>>>>>>> upstream/master
 
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]
@@ -201,6 +205,12 @@ com.nianticproject.ingress.common.gfx1.Drawer:
 
 com.nianticproject.ingress.common.gfx1.CameraControls:
   find_by_string: Camera has been revoked
+
+com.nianticproject.ingress.common.gfx2.ShaderUtils:
+  methods:
+    compileShader: [a, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
+
+  find_by_string: Shader failed to compile
 
 ### RPC
 
@@ -431,8 +441,7 @@ com.nianticproject.ingress.common.inventory.ui.InventoryItemRenderer:
   methods:
     rotate: [a, Z, F]
 
-  obf_name: com.nianticproject.ingress.common.inventory.ui.ar
-
+  find_by_string: '0x4099999a'
 
 com.nianticproject.ingress.common.inventory.ui.IndistinguishableItems:
   methods:

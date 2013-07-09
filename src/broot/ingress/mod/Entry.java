@@ -10,6 +10,7 @@ import broot.ingress.mod.util.MenuUtils;
 import broot.ingress.mod.util.UiVariant;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -187,13 +188,16 @@ public class Entry {
         return Config.itemAnimationsEnabled;
     }
 
-
     private static Boolean uiHQ_XM_value = null;
     public static boolean uiHQ_XM() {
         if(uiHQ_XM_value == null) {
           uiHQ_XM_value = Config.hqXM;
         }
         return uiHQ_XM_value;
+    }
+
+    public static ShaderProgram ShaderUtils_compileShader(String vertex, String frag, String name) {
+        return new ShaderProgram(vertex, frag);
     }
 
     public static ClientType getClientType() {

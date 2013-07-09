@@ -184,6 +184,17 @@ def main():
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewHackAnimations', 'v0', 'v0')
     edit.save()
 
+    #modify shader code before compiling it
+    edit = edit_cls('ShaderUtils')
+    edit.find_line(r' new-instance ([pv]\d+), Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;')
+    shaderReg = edit.vars[0]
+    edit.comment_line()
+    edit.find_line(r' invoke-direct \{.*\}, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;-><init>\(Ljava/lang/String;Ljava/lang/String;\)V', where='down')
+    edit.comment_line()
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ShaderUtils_compileShader', 'p0, p1, p2', shaderReg)
+    edit.save()
+
     #stop inventory item rotation
     edit = edit_cls('InventoryItemRenderer')
     edit.prepare_after_prologue('rotate')
@@ -209,10 +220,10 @@ def main():
     edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*')
     edit.prepare_to_insert()
     edit.add_invoke_entry('InventoryItemRenderer_simplifyItems', ret='v0')
-    edit.add_line('if-nez v0, :skip_item_shader')
+    edit.add_line(' if-nez v0, :skip_item_shader')
     edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*', where='down')
     edit.prepare_to_insert()
-    edit.add_line(':skip_item_shader')
+    edit.add_line(' :skip_item_shader')
     edit.save()
 
     #xm rendering
@@ -231,6 +242,7 @@ def main():
     edit.prepare_to_insert()
     edit.add_line(':skip_uniform_timesec')
     edit.save()
+
 
 if __name__ == '__main__':
     main()
