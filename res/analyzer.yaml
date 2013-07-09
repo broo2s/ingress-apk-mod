@@ -424,8 +424,7 @@ com.nianticproject.ingress.common.inventory.ui.InventoryItemRenderer:
   methods:
     rotate: [a, Z, F]
 
-  obf_name: com.nianticproject.ingress.common.inventory.ui.ar
-
+  find_by_string: '0x4099999a'
 
 com.nianticproject.ingress.common.inventory.ui.IndistinguishableItems:
   methods:

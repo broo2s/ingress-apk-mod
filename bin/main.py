@@ -197,10 +197,10 @@ def main():
     edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*')
     edit.prepare_to_insert()
     edit.add_invoke_entry('InventoryItemRenderer_simplifyItems', ret='v0')
-    edit.add_line('if-nez v0, :skip_item_shader')
+    edit.add_line(' if-nez v0, :skip_item_shader')
     edit.find_line('.*Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;->end.*', where='down')
     edit.prepare_to_insert()
-    edit.add_line(':skip_item_shader')
+    edit.add_line(' :skip_item_shader')
     edit.save()
 
 if __name__ == '__main__':
