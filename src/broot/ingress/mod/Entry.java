@@ -10,6 +10,7 @@ import broot.ingress.mod.util.MenuUtils;
 import broot.ingress.mod.util.UiVariant;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -185,6 +186,10 @@ public class Entry {
 
     public static boolean InventoryItemRenderer_simplifyItems() {
         return Config.simplifyInventoryItems;
+    }
+
+    public static ShaderProgram ShaderUtils_compileShader(String vertex, String frag, String name) {
+        return new ShaderProgram(vertex, frag);
     }
 
     public static ClientType getClientType() {

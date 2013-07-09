@@ -30,6 +30,7 @@ broot.ingress.mod.Entry:
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     InventoryItemRenderer_shouldRotate: [null, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
+    ShaderUtils_compileShader: [null, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
 
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]
@@ -199,6 +200,12 @@ com.nianticproject.ingress.common.gfx1.Drawer:
 
 com.nianticproject.ingress.common.gfx1.CameraControls:
   find_by_string: Camera has been revoked
+
+com.nianticproject.ingress.common.gfx2.ShaderUtils:
+  methods:
+    compileShader: [a, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
+
+  find_by_string: Shader failed to compile
 
 ### RPC
 

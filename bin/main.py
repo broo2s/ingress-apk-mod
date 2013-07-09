@@ -203,5 +203,17 @@ def main():
     edit.add_line(' :skip_item_shader')
     edit.save()
 
+    #modify shader code before compiling it
+    edit = edit_cls('ShaderUtils')
+    edit.find_line(r' new-instance ([pv]\d+), Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;')
+    shaderReg = edit.vars[0]
+    edit.comment_line()
+    edit.find_line(r' invoke-direct \{.*\}, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;-><init>\(Ljava/lang/String;Ljava/lang/String;\)V', where='down')
+    edit.comment_line()
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ShaderUtils_compileShader', 'p0, p1, p2', shaderReg)
+    edit.save()
+
+
 if __name__ == '__main__':
     main()
