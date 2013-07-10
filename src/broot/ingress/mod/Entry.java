@@ -40,6 +40,7 @@ import java.util.TreeMap;
 public class Entry {
 
   private static Label portalInfoDistLabel;
+  private static boolean uiHQ_XM_value = true;
 
   static {
     Mod.init();
@@ -50,6 +51,7 @@ public class Entry {
     Config.load();
     Mod.displayMetrics = new DisplayMetrics();
     ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(Mod.displayMetrics);
+    uiHQ_XM_value = Config.hqXM;
   }
 
   public static void NemesisActivity_onOnCreate(NemesisActivity activity) {
@@ -189,12 +191,8 @@ public class Entry {
   public static boolean ItemActionHandler_itemAnimationsEnabled() {
     return Config.itemAnimationsEnabled;
   }
-  private static Boolean uiHQ_XM_value = null;
 
   public static boolean uiHQ_XM() {
-    if (uiHQ_XM_value == null) {
-      uiHQ_XM_value = Config.hqXM;
-    }
     return uiHQ_XM_value;
   }
 
@@ -216,13 +214,29 @@ public class Entry {
 
   public static ShaderProgram ShaderUtils_compileShader(String vertex, String frag, String name) {
 
-    if (name.equals("shaders/particle_xm.glsl.vert")) {
+    if (!Entry.uiHQ_XM() && name.equals("shaders/particle_xm.glsl.vert")) {
       vertex = ShaderFactory.start(vertex)
+              .findLine(".*varying float v_alpha;.*").removeLine()
+              .findLine(".*float tModulus =.*").removeLine()
+              .findLine(".*float timeOffset =.*").removeLine()
+              .findLine(".*float elapsedTime =.*").removeLine()
+              .findLine(".*float spread =.*").removeLine()
+              .findLine(".*float hoover =.*").removeLine()
+              .findLine(".*float tm =.*").removeLine()
+              .findLine(".*float t =.*").removeLine()
+              .findLine(".*v_alpha =.*").removeLine()
+              .findLine(".*v_alpha =.*").removeLine()
+              .findLine(".*v_alpha \\*=.*").removeLine()
+              .findLine(".*float normIndex =.*").removeLine()
+              .findLine(".*vec3 dynamics =.*").removeLine()
+              .findLine(".*vec3 hooverDynamics =.*").removeLine()
+              .findLine(".*v_texCoord0 =.*").removeLine()
               .findLine("^\\s*void main.*")
-              .findLineDown("^\\s*vec2 scales.*").replace("a_scale", "0.5")
+              .findLineDown("^\\s*vec2 scales.*").replace("a_scale", "0.5 * a_scale")
               .findLineDown("^\\s*vec4\\(position.*").replace("+ dynamics + hooverDynamics", "")
               .commit();
       frag = ShaderFactory.start(frag)
+              .findLine(".*varying float v_alpha;.*").removeLine()
               .findLine("^\\s*void main.*")
               .findLineDown("^\\s*vec4 texture.*").removeLine()
               .findLineDown("^\\s*gl_FragColor.*").replace(" texture.w * v_alpha)", "0.15);")
