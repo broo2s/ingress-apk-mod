@@ -29,13 +29,9 @@ broot.ingress.mod.Entry:
     PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
-<<<<<<< HEAD
     ItemActionHandler_itemAnimationsEnabled: [null, Z]
-
-    uiHQ_XM: [null, Z]
-=======
     ShaderUtils_compileShader: [null, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
->>>>>>> upstream/master
+    uiHQ_XM: [null, Z]
 
     getClientType: [null, $ClientType]
     getClientTypeForJackson: [null, $ClientType]
@@ -358,6 +354,10 @@ com.nianticproject.ingress.common.scanner.ScannerStateManager:
 com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
   fields:
     enabled: [a, Z]
+
+  methods:
+    setGameState: [a, V, Lcom/nianticproject/ingress/common/model/GameState;]
+    draw: [a, V, Lcom/badlogic/gdx/math/Matrix4;Lcom/nianticproject/ingress/common/j/c;Lcom/nianticproject/ingress/common/j/k;]
 
   find_by_string: Portal Particle Render
 

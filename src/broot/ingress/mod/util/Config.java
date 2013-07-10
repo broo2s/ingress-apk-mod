@@ -56,7 +56,7 @@ public class Config {
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
         simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
 
-        simplifyInventoryItems = prefs.getBoolean("hqXM", true);
+        hqXM = prefs.getBoolean("hqXM", true);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
