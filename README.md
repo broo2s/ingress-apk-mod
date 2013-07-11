@@ -33,6 +33,10 @@ Other features:
 News
 ----
 
+08.07.2013
+
+- inventory items rotation and rendering
+
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
 - initial version
@@ -90,7 +94,7 @@ It depends on multiple jars and command line tools:
 - bash
 - Python3
 - JDK7, java and javac in PATH
-- apktool.jar v2.x
+- apktool.jar v2.x (must be compiled from source)
 - baksmali.jar v1.4.2
 - libgdx v0.9.7: gdx.jar, gdx-natives.jar, gdx-tools.jar, gdx-backend-lwjgl.jar, gdx-backend-lwjgl-natives.jar
 - android.jar from Android SDK
