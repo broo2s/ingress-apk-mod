@@ -35,7 +35,7 @@ News
 
 08.07.2013
 
-- Inventory items rotation and rendering
+- inventory items rotation and rendering
 
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
