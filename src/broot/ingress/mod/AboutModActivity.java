@@ -163,6 +163,14 @@ public class AboutModActivity extends BaseSubActivity {
                         updateUiTweaksValues(true);
                     }
                 });
+                uiTweaksItem.addButton("Chat time format", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.enable24HoursTimeFormat = !Config.enable24HoursTimeFormat;
+                        updateUiTweaksValues(true);
+                        restartItem.descLabel.setText("Restart is recommended");
+                    }
+                });
                 addItem(uiTweaksItem);
 
                 addItem(uiVariantItem = new ListItem(skin, "UI variant", "", "Toggle", new ClickListener() {
@@ -259,6 +267,7 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
+        uiTweaksItem.buttons.get(5).setText(Config.enable24HoursTimeFormat ? "24 Hours" : "12 Hours");
     }
 
     private void updateUiVariantValue() {

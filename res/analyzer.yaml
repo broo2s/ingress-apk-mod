@@ -37,6 +37,8 @@ broot.ingress.mod.Entry:
     shouldSkipIntro: [null, Z]
     shouldDrawScannerObject: [null, Z]
 
+    CommsAdapter_getDateFormat: [null, $SimpleDateFormat]
+
 ### MODEL
 
 com.nianticproject.ingress.common.model.PlayerModel:
@@ -521,6 +523,23 @@ com.nianticproject.ingress.common.device.DeviceActivityUi:
 com.nianticproject.ingress.common.recruit.RecruitActivity:
   find_by_string: RecruitActivity
 
+### COMM
+com.nianticproject.ingress.ui.CommsAdapter:
+  methods:
+    bindView: [a, V, $View, $Context, $Cursor]
+
+  find_by_string: "CommsAdapter.newView"
+
+### FRAMEWORK
+android.view.View:
+  is_real_name: true
+
+android.content.Context:
+  is_real_name: true
+
+android.database.Cursor:
+  is_real_name: true
+
 ### LIB
 
 com.google.common.geometry.S2LatLng:
@@ -622,4 +641,7 @@ com.esotericsoftware.tablelayout.Value$TableValue:
 ### JAVA
 
 java.lang.String:
+  is_real_name: true
+
+java.text.SimpleDateFormat:
   is_real_name: true

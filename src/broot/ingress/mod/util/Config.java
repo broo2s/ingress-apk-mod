@@ -27,6 +27,7 @@ public class Config {
     public static boolean xmGlobsEnabled;
     public static boolean scannerObjectsEnabled;
     public static boolean simplifyInventoryItems;
+    public static boolean enable24HoursTimeFormat;
 
     public static UiVariant uiVariant;
 
@@ -53,6 +54,7 @@ public class Config {
         xmGlobsEnabled = prefs.getBoolean("xmGlobsEnabled", true);
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
         simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
+        enable24HoursTimeFormat = prefs.getBoolean("enable24HoursTimeFormat", false);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
@@ -85,6 +87,7 @@ public class Config {
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
         e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
+        e.putBoolean("enable24HoursTimeFormat", enable24HoursTimeFormat);
 
         e.putString("uiVariant", uiVariant.name);
 

@@ -214,6 +214,23 @@ def main():
     edit.add_invoke_entry('ShaderUtils_compileShader', 'p0, p1, p2', shaderReg)
     edit.save()
 
+    edit = edit_cls('CommsAdapter')
+    edit.prepare_after_prologue('bindView')
+    edit.find_line(r' iget-object v3, p0, %s->l:%s' % (expr('$CommsAdapter'), expr('$SimpleDateFormat')))
+    edit.comment_line()
+    edit.add_invoke_entry('CommsAdapter_getDateFormat', '', 'v3')
+    edit.save()
+
+#    edit.find_line(r' const-string/jumbo ([pv]\d+), "h:mma"')
+#    tfReg = edit.vars[0]
+#    edit.comment_line()
+#    edit.prepare_to_insert()
+#    edit.add_invoke_entry('CommsAdapter_getTimeFormat', '', tfReg)
+#    edit.find_line(r' const-string/jumbo ([pv]\d+), "MMM dd"')
+#    dfReg = edit.vars[0]
+#    edit.comment_line()
+#    edit.prepare_to_insert()
+#    edit.add_invoke_entry('CommsAdapter_getDateFormat', '', dfReg)
 
 if __name__ == '__main__':
     main()

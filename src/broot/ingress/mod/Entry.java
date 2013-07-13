@@ -30,6 +30,7 @@ import com.nianticproject.ingress.gameentity.components.LocationE6;
 import com.nianticproject.ingress.shared.ClientType;
 import com.nianticproject.ingress.shared.location.LocationUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,9 @@ import java.util.TreeMap;
 public class Entry {
 
     private static Label portalInfoDistLabel;
+    
+    private static SimpleDateFormat tf12 = new SimpleDateFormat("h:mma");
+    private static SimpleDateFormat tf24 = new SimpleDateFormat("HH:mm:ss");
 
     static {
         Mod.init();
@@ -206,5 +210,9 @@ public class Entry {
 
     public static boolean shouldDrawScannerObject() {
         return Config.scannerObjectsEnabled;
+    }
+    
+    public static SimpleDateFormat CommsAdapter_getDateFormat() {
+        return Config.enable24HoursTimeFormat ? tf24 : tf12;
     }
 }
