@@ -84,7 +84,7 @@ public class Config {
         e.putBoolean("portalParticlesEnabled", portalParticlesEnabled);
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
-        e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
+        e.putBoolean("simplifyInventoryItems", simplifyInventoryItems);
 
         e.putString("uiVariant", uiVariant.name);
 
