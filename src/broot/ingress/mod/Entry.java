@@ -212,7 +212,11 @@ public class Entry {
     public static boolean shouldDrawScannerObject() {
         return Config.scannerObjectsEnabled;
     }
-    
+
+    public static boolean ItemActionHandler_recycleAnimationsEnabled() {
+        return Config.recycleAnimationsEnabled;
+    }
+
     public static SimpleDateFormat CommsAdapter_getDateFormat() {
         switch (Config.enable24HoursTimeFormat) {
             case 0:  return tf12;

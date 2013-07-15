@@ -221,16 +221,18 @@ def main():
     edit.add_invoke_entry('CommsAdapter_getDateFormat', '', 'v3')
     edit.save()
 
-#    edit.find_line(r' const-string/jumbo ([pv]\d+), "h:mma"')
-#    tfReg = edit.vars[0]
-#    edit.comment_line()
-#    edit.prepare_to_insert()
-#    edit.add_invoke_entry('CommsAdapter_getTimeFormat', '', tfReg)
-#    edit.find_line(r' const-string/jumbo ([pv]\d+), "MMM dd"')
-#    dfReg = edit.vars[0]
-#    edit.comment_line()
-#    edit.prepare_to_insert()
-#    edit.add_invoke_entry('CommsAdapter_getDateFormat', '', dfReg)
+    #remove recycle animation
+    edit = edit_cls('ItemActionHandler')
+    edit.find_method_def('recycle')
+    edit.find_line(' \.locals 4', where='down')
+    edit.replace_in_line('4', '5')
+    edit.find_line(' const-wide/16 v2, 0x4b0', where='down')
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ItemActionHandler_recycleAnimationsEnabled', ret='v4')
+    edit.add_line(' if-nez v4, :lbl_recycle_delay');
+    edit.add_line(' const-wide/16 v2, 0x0')
+    edit.add_line(' :lbl_recycle_delay')
+    edit.save()
 
 if __name__ == '__main__':
     main()

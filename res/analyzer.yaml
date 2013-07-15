@@ -30,6 +30,7 @@ broot.ingress.mod.Entry:
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     InventoryItemRenderer_shouldRotate: [null, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
+    ItemActionHandler_recycleAnimationsEnabled: [null, Z]
     ShaderUtils_compileShader: [null, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
 
     getClientType: [null, $ClientType]

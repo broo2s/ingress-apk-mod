@@ -20,6 +20,7 @@ public class Config {
     public static boolean scannerZoomInAnimEnabled;
     public static boolean newHackAnimEnabled;
     public static boolean rotateInventoryItemsEnabled;
+    public static boolean recycleAnimationsEnabled;
 
     public static boolean fullscreen;
     public static boolean showPortalVectors;
@@ -47,6 +48,7 @@ public class Config {
         scannerZoomInAnimEnabled = prefs.getBoolean("scannerZoomInAnimEnabled", true);
         newHackAnimEnabled = prefs.getBoolean("newHackAnimEnabled", true);
         rotateInventoryItemsEnabled = prefs.getBoolean("rotateInventoryItemsEnabled", true);
+        recycleAnimationsEnabled = prefs.getBoolean("recycleAnimationsEnabled", true);
 
         fullscreen = prefs.getBoolean("fullscreen", false);
         showPortalVectors = prefs.getBoolean("showPortalVectors", true);
@@ -80,6 +82,7 @@ public class Config {
         e.putBoolean("scannerZoomInAnimEnabled", scannerZoomInAnimEnabled);
         e.putBoolean("newHackAnimEnabled", newHackAnimEnabled);
         e.putBoolean("rotateInventoryItemsEnabled", rotateInventoryItemsEnabled);
+        e.putBoolean("recycleAnimationsEnabled", recycleAnimationsEnabled);
 
         e.putBoolean("fullscreen", fullscreen);
         e.putBoolean("showPortalVectors", showPortalVectors);
