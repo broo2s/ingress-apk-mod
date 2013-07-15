@@ -36,6 +36,10 @@ Other features:
 News
 ----
 
+15.07.2013
+
+- Recycle animation
+- Time format in chat
 
 08.07.2013
 
@@ -43,7 +47,7 @@ News
 
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
-- initial version
+- Initial version
 
 
 Quick build instructions
