@@ -86,7 +86,7 @@ public class Config {
         e.putBoolean("portalParticlesEnabled", portalParticlesEnabled);
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
-        e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
+        e.putBoolean("simplifyInventoryItems", simplifyInventoryItems);
         e.putBoolean("enable24HoursTimeFormat", enable24HoursTimeFormat);
 
         e.putString("uiVariant", uiVariant.name);
