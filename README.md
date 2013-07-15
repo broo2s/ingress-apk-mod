@@ -16,7 +16,10 @@ Features
     - disable scanner zoom in anim - it's GPU consuming and delays portal dialog opening
     - disable vectors to portals
     - disable portal particles (XM "fountain" above portals)
+    - disable inventory items rotation and rendering
     - revert to old hack anim
+    - disable recycle animation
+    - change time format in chat
 - real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
 - keys number on portal info screen
 - option to hide unwanted menu tabs
@@ -32,6 +35,11 @@ Other features:
 
 News
 ----
+
+
+08.07.2013
+
+- Inventory items rotation and rendering
 
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
