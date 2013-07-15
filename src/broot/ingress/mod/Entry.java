@@ -42,6 +42,7 @@ public class Entry {
     
     private static SimpleDateFormat tf12 = new SimpleDateFormat("h:mma");
     private static SimpleDateFormat tf24 = new SimpleDateFormat("HH:mm:ss");
+    private static SimpleDateFormat tf24ns = new SimpleDateFormat("HH:mm");
 
     static {
         Mod.init();
@@ -213,6 +214,10 @@ public class Entry {
     }
     
     public static SimpleDateFormat CommsAdapter_getDateFormat() {
-        return Config.enable24HoursTimeFormat ? tf24 : tf12;
+        switch (Config.enable24HoursTimeFormat) {
+            case 0:  return tf12;
+            case 1:  return tf24;
+            default:  return tf24ns;
+        }
     }
 }
