@@ -20,7 +20,7 @@ def main():
     edit.save()
 
     edit = edit_cls('NemesisWorld')
-    edit.find_line(r' const-string/jumbo ([vp]\d+), "NemesisWorld.init"')
+    edit.find_line(r' new-array ([vp]\d+), ([vp]\d+), \[%s' % expr_type('$BaseSubActivity'))
     edit.find_line(r' return-void', where='down')
     edit.prepare_to_insert_before(True)
     edit.add_line(' move-object/from16 v0, p0')
@@ -103,21 +103,21 @@ def main():
     edit.save()
 
     edit = edit_cls('PortalInfoDialog')
-    edit.mod_field_def('portalComponent', 'public')
+#    edit.mod_field_def('portalComponent', 'public')
 
-    edit.find_line(r' .+"Owner: "')
-    edit.find_line(
-        r' invoke-virtual \{([pv]\d+), [pv]\d+\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+',
-        where='down')
-    tab = edit.vars[0]
-    edit.find_line(
-        r' invoke-virtual \{[pv]\d+, %s\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+' % tab,
-        where='down')
-    edit.prepare_to_insert_before()
-    edit.add_invoke_entry('PortalInfoDialog_onStatsTableCreated', 'p0, %s' % tab)
+#    edit.find_line(r' .+"Owner: "')
+#    edit.find_line(
+#        r' invoke-virtual \{([pv]\d+), [pv]\d+\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+',
+#        where='down')
+#    tab = edit.vars[0]
+#    edit.find_line(
+#        r' return-object %s' % tab,
+#        where='down')
+#    edit.prepare_to_insert_before()
+#    edit.add_invoke_entry('PortalInfoDialog_onStatsTableCreated', 'p0, %s' % tab)
 
-    edit.prepare_after_prologue('onPlayerLocationChanged')
-    edit.add_invoke_entry('PortalInfoDialog_onPlayerLocationChanged')
+#    edit.prepare_after_prologue('onPlayerLocationChanged')
+#    edit.add_invoke_entry('PortalInfoDialog_onPlayerLocationChanged')
 
     edit.find_line(r' const.*? ([pv]\d+), 0x3f40')
     edit.prepare_to_insert()
