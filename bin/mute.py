@@ -10,7 +10,7 @@ def main():
     shutil.rmtree('%s/app/assets/sounds' % HOME)
 
     edit = edit_cls('AudioSystemManager')
-    edit.find_line(r' const-string/jumbo v0, "Audio:addTask\("')
+    edit.find_line(r' const/4 v0, 0x2')
     edit.find_prologue(where='up')
     edit.prepare_to_insert(2)
     edit.add_line(' return-void')
