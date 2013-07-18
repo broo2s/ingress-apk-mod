@@ -25,12 +25,12 @@ def main(release):
 
         proguard.sh @$MOD_HOME/res/%s.pg
 
-        dx --dex --output=$builddir/dex.apk $builddir/proguard
+        dx --dex --output=$builddir/dex.apk $builddir/proguard.zip
         java -jar $MOD_HOME/lib/baksmali.jar $builddir/dex.apk -o $builddir/smali
 
         cp -r $builddir/smali/* $MOD_HOME/app/smali/
         java -jar $MOD_HOME/lib/apktool.jar b%s $MOD_HOME/app
-        $MOD_HOME/bin/sign_apk.py `ls $MOD_HOME/app/dist/ingress-*.apk` %s
+        $MOD_HOME/bin/sign_apk.py `ls $MOD_HOME/app/dist/*ingress-*.apk` %s
     ''' % (('release', '', 'release') if release else ('debug', ' -d', 'debug')), shell=True)
 
 

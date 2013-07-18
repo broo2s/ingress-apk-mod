@@ -16,7 +16,10 @@ Features
     - disable scanner zoom in anim - it's GPU consuming and delays portal dialog opening
     - disable vectors to portals
     - disable portal particles (XM "fountain" above portals)
+    - disable inventory items rotation and rendering
     - revert to old hack anim
+    - disable recycle animation
+    - change time format in chat
 - real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
 - keys number on portal info screen
 - option to hide unwanted menu tabs
@@ -33,9 +36,19 @@ Other features:
 News
 ----
 
+18.07.2013 - **v1.31.1-broot-1.0.1 has been released!**
+
+Changes from 1.0.0:
+
+- Migrated to 1.31.1
+- Added option to disable recycle animation
+- Added option to disable items rotation and rendering
+- Added option to choose time format in chat
+- Some bugs fixed
+
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
-- initial version
+- Initial version
 
 
 Quick build instructions
@@ -90,7 +103,7 @@ It depends on multiple jars and command line tools:
 - bash
 - Python3
 - JDK7, java and javac in PATH
-- apktool.jar v2.x
+- apktool.jar v2.x (must be build from sources, see https://github.com/brutall/brut.apktool/tree/wip-2.0)
 - baksmali.jar v1.4.2
 - libgdx v0.9.7: gdx.jar, gdx-natives.jar, gdx-tools.jar, gdx-backend-lwjgl.jar, gdx-backend-lwjgl-natives.jar
 - android.jar from Android SDK

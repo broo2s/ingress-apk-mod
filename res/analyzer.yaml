@@ -30,6 +30,7 @@ broot.ingress.mod.Entry:
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     InventoryItemRenderer_shouldRotate: [null, Z]
     InventoryItemRenderer_simplifyItems: [null, Z]
+    ItemActionHandler_recycleAnimationsEnabled: [null, Z]
     ShaderUtils_compileShader: [null, Lcom/badlogic/gdx/graphics/glutils/ShaderProgram;, $String, $String, $String]
 
     getClientType: [null, $ClientType]
@@ -37,7 +38,12 @@ broot.ingress.mod.Entry:
     shouldSkipIntro: [null, Z]
     shouldDrawScannerObject: [null, Z]
 
+    CommsAdapter_getDateFormat: [null, $SimpleDateFormat]
+
 ### MODEL
+
+com.nianticproject.ingress.common.model.GameState:
+  is_real_name: true
 
 com.nianticproject.ingress.common.model.PlayerModel:
   methods:
@@ -49,15 +55,16 @@ com.nianticproject.ingress.common.model.PlayerModel:
 
 com.nianticproject.ingress.common.model.PlayerModelImpl:
   super: $PlayerModel
-  find_by_string: PlayerModel\.notify
+
+  find_by_string: "player.energyState"
 
 com.nianticproject.ingress.common.model.PlayerListener:
   methods:
-    getName: [a, $String]
+    onDamage: [a, V, $PlayerDamage]
     onLocationChanged: [a, V, $PlayerLocation]
 
   find:
-    - [by_method, false, true, getName, public abstract]
+    - [by_method, false, true, onDamage, public abstract]
     - [by_method, false, true, onLocationChanged, public abstract]
 
 com.nianticproject.ingress.common.model.BasePlayerListener:
@@ -87,6 +94,9 @@ com.nianticproject.ingress.gameentity.components.FlipCardType:
   find_by_string: ADA Refactor
 
 ### SHARED
+
+com.nianticproject.ingress.shared.model.PlayerDamage:
+  is_real_name: true
 
 com.nianticproject.ingress.shared.ItemType:
   is_enum: true
@@ -153,7 +163,7 @@ com.nianticproject.ingress.common.app.NemesisWorld:
     getPlayerModel: [b, $PlayerModel]
     getSubActivityManager: [n, $SubActivityManager]
 
-  find_by_string: NemesisWorld\.init
+  find_by_string: "PlayerModel is not in training mode"
 
 com.nianticproject.ingress.common.app.NemesisCache:
   methods:
@@ -167,7 +177,7 @@ com.nianticproject.ingress.common.app.NemesisCache:
   find_interface_of: $NemesisMemoryCache
 
 com.nianticproject.ingress.common.app.NemesisMemoryCache:
-  find_by_string: NemesisMemoryCache
+  find_by_string: "Local change applied to server-deleted Entity.  Ignoring."
 
 com.nianticproject.ingress.common.app.NemesisMemoryCacheFactory:
   methods:
@@ -188,7 +198,7 @@ com.nianticproject.ingress.common.assets.ScreenDensity:
   find_by_string: XHIGH
 
 com.nianticproject.ingress.common.audio.AudioSystemManager:
-  find_by_string: AudioSystemManager
+  find_by_string: "processAudioTasks:task "
 
 ### GFX
 
@@ -233,7 +243,7 @@ com.nianticproject.ingress.common.ui.UiRenderer:
   methods:
     addUiLayer: [a, V, $UiLayer]
 
-  find_by_string: UiRenderer
+  find_by_string: "UI Render"
 
 com.nianticproject.ingress.common.ui.mode.UiMode:
   methods:
@@ -259,7 +269,10 @@ com.nianticproject.ingress.common.ui.SubActivity:
   find_interface_of: $BaseSubActivity
 
 com.nianticproject.ingress.common.ui.SubActivityState:
-  find_by_string: onEnterForeground
+  methods:
+    updateActivityGameState: [a, V, $GameState, $GameState]
+
+  find_by_method: updateActivityGameState
 
 com.nianticproject.ingress.common.ui.SubActivityManager:
   fields:
@@ -271,7 +284,7 @@ com.nianticproject.ingress.common.ui.SubActivityManager:
     getForegroundActivity: [b, $SubActivity]
     replaceForegroundActivity: [d, $SubActivity, Ljava/lang/Class;]
 
-  find_by_string: SubActivityManager
+  find_by_string: "Ambiguous SubActivity Class: "
 
 com.nianticproject.ingress.common.ui.BaseSubActivity:
   methods:
@@ -286,7 +299,9 @@ com.nianticproject.ingress.common.ui.SubActivityApplicationListener:
   methods:
     create: [create, V]
 
-  find_by_string: SubActivityApplicationListener
+#  find_super_of: $ApplicationListener
+
+  find_by_string: "{data:common/data/nemesis.json,data-xhdpi:common/data-xhdpi/nemesis.json,data-xxhdpi:common/data-xxhdpi/nemesis.json}"
 
 com.nianticproject.ingress.common.ui.LabelButtonActivity:
   find_super_of: $RecruitActivity
@@ -366,7 +381,7 @@ com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
 #  find_by_string: '"EnergyGlobVisuals.draw"'
 
 com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
-  find_by_string: ScannerDestinationVisuals
+  find_by_string: "CLEAR"
 
 com.nianticproject.ingress.common.scanner.modes.ZoomInMode:
   super: $UiMode
@@ -380,12 +395,12 @@ com.nianticproject.ingress.common.ui.elements.PortalInfoDialog:
   super: $UiLayer
 
   fields:
-    portalComponent: [r, Lcom/nianticproject/ingress/gameentity/components/Portal;]
+    portalComponent: [s, Lcom/nianticproject/ingress/gameentity/components/Portal;]
 
   methods:
-    onPlayerLocationChanged: [n, V]
+    onPlayerLocationChanged: [q, V]
 
-  find_by_string: PortalInfoDialog\.createResources
+  find_by_string: "Unknown Portal"
 
 com.nianticproject.ingress.common.scanner.modes.RepeatedActionUi:
   super: $UiLayer
@@ -443,7 +458,13 @@ com.nianticproject.ingress.common.inventory.ui.IndistinguishableItems:
 
     fromItemsByPlayerInfo: [a, Ljava/util/List;, $PlayerModel, Ljava/util/Collection;]
 
-  find_by_string: IndistinguishableItems
+  find:
+    - [by_string, false, true, " missing EmpWeapon component"]
+    - [by_method, false, true, getType]
+    - [by_method, false, true, getLevel]
+    - [by_method, false, true, getRarity]
+    - [by_method, false, true, getCount]
+    - [by_method, false, true, getEntity]
 
 com.nianticproject.ingress.common.inventory.ui.ItemsMenuController:
   methods:
@@ -521,6 +542,23 @@ com.nianticproject.ingress.common.device.DeviceActivityUi:
 com.nianticproject.ingress.common.recruit.RecruitActivity:
   find_by_string: RecruitActivity
 
+### COMM
+com.nianticproject.ingress.ui.CommsAdapter:
+  methods:
+    bindView: [a, V, $View, $Context, $Cursor]
+
+  find_by_string: "MMM dd"
+
+### FRAMEWORK
+android.view.View:
+  is_real_name: true
+
+android.content.Context:
+  is_real_name: true
+
+android.database.Cursor:
+  is_real_name: true
+
 ### LIB
 
 com.google.common.geometry.S2LatLng:
@@ -539,6 +577,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin:
   is_real_name: true
 
 com.badlogic.gdx.scenes.scene2d.Stage:
+  is_real_name: true
+
+com.badlogic.gdx.ApplicationListener:
   is_real_name: true
 
 com.esotericsoftware.tablelayout.Cell:
@@ -622,4 +663,7 @@ com.esotericsoftware.tablelayout.Value$TableValue:
 ### JAVA
 
 java.lang.String:
+  is_real_name: true
+
+java.text.SimpleDateFormat:
   is_real_name: true
