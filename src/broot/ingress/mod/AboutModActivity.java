@@ -173,7 +173,7 @@ public class AboutModActivity extends BaseSubActivity {
                 uiTweaksItem.addButton("Chat time format", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.enable24HoursTimeFormat = (Config.enable24HoursTimeFormat + 1) % 3;
+                        Config.chatTimeFormat = (Config.chatTimeFormat + 1) % 3;
                         updateUiTweaksValues(true);
                         restartItem.descLabel.setText("Restart is recommended");
                     }
@@ -276,10 +276,10 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
-        switch (Config.enable24HoursTimeFormat) {
-            case 0:  timeFormatLabel = "12 Hours"; break;
-            case 1:  timeFormatLabel = "24 Hours"; break;
-            default:  timeFormatLabel = "24h No seconds"; break;
+        switch (Config.chatTimeFormat) {
+            case 0:  timeFormatLabel = "12:00 AM"; break;
+            case 1:  timeFormatLabel = "00:00:00"; break;
+            default:  timeFormatLabel = "00:00"; break;
         }
         uiTweaksItem.buttons.get(5).setText(timeFormatLabel);
     }

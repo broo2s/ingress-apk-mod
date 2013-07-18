@@ -218,7 +218,7 @@ public class Entry {
     }
 
     public static SimpleDateFormat CommsAdapter_getDateFormat() {
-        switch (Config.enable24HoursTimeFormat) {
+        switch (Config.chatTimeFormat) {
             case 0:  return tf12;
             case 1:  return tf24;
             default:  return tf24ns;
