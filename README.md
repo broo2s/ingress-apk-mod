@@ -36,14 +36,15 @@ Other features:
 News
 ----
 
-15.07.2013
+18.07.2013 - **v1.31.1-broot-1.0.1 has been released!**
 
-- Recycle animation
-- Time format in chat
+Changes from 1.0.0:
 
-08.07.2013
-
-- Inventory items rotation and rendering
+- Migrated to 1.31.1
+- Added option to disable recycle animation
+- Added option to disable items rotation and rendering
+- Added option to choose time format in chat
+- Some bugs fixed
 
 07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
 
@@ -102,7 +103,7 @@ It depends on multiple jars and command line tools:
 - bash
 - Python3
 - JDK7, java and javac in PATH
-- apktool.jar v2.x
+- apktool.jar v2.x (must be build from sources, see https://github.com/brutall/brut.apktool/tree/wip-2.0)
 - baksmali.jar v1.4.2
 - libgdx v0.9.7: gdx.jar, gdx-natives.jar, gdx-tools.jar, gdx-backend-lwjgl.jar, gdx-backend-lwjgl-natives.jar
 - android.jar from Android SDK
