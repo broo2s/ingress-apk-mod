@@ -29,6 +29,7 @@ public class Config {
     public static boolean scannerObjectsEnabled;
     public static boolean simplifyInventoryItems;
     public static int chatTimeFormat;
+    public static boolean vibration;
 
     public static UiVariant uiVariant;
 
@@ -57,6 +58,7 @@ public class Config {
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
         simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
         chatTimeFormat = prefs.getInt("chatTimeFormat", 0);
+        vibration = prefs.getBoolean("vibration", true);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
@@ -91,6 +93,7 @@ public class Config {
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
         e.putBoolean("simplifyInventoryItems", simplifyInventoryItems);
         e.putInt("chatTimeFormat", chatTimeFormat);
+        e.putBoolean("vibration", vibration);
 
         e.putString("uiVariant", uiVariant.name);
 

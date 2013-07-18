@@ -37,6 +37,7 @@ broot.ingress.mod.Entry:
     getClientTypeForJackson: [null, $ClientType]
     shouldSkipIntro: [null, Z]
     shouldDrawScannerObject: [null, Z]
+    vibrationEnabled: [null, Z]
 
     CommsAdapter_getDateFormat: [null, $SimpleDateFormat]
 
@@ -349,6 +350,11 @@ com.nianticproject.ingress.common.ui.widget.MenuTopWidget:
 
 com.nianticproject.ingress.common.ui.widget.MenuScrollLabel:
   find_by_super: Lcom/nianticproject/ingress/common/ui/widget/ScrollLabel;
+
+com.nianticproject.ingress.common.ui.widget.WidgetCarousel:
+  methods:
+    scroll: [act, V, F]
+  is_real_name: true
 
 ### SCANNER
 
