@@ -23,7 +23,7 @@ def main(release):
         javac -Xlint:-options -g:none -source 6 -target 6 -cp $MOD_HOME/lib/android.jar:$MOD_HOME/lib/gdx.jar -d $builddir/ifc `find -H $MOD_HOME/ifc -type f -iname "*.java"`
         javac -Xlint:-options -g -source 6 -target 6 -cp $builddir/ifc:$MOD_HOME/lib/android.jar:$MOD_HOME/lib/gdx.jar -d $builddir/src `find -H $MOD_HOME/src -type f -iname "*.java" -not -name BuildConfig.java` $MOD_HOME/build/BuildConfig.java
 
-        proguard.sh @$MOD_HOME/res/%s.pg
+        proguard.sh -dontwarn @$MOD_HOME/res/%s.pg
 
         dx --dex --output=$builddir/dex.apk $builddir/proguard.zip
         java -jar $MOD_HOME/lib/baksmali.jar $builddir/dex.apk -o $builddir/smali
