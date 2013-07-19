@@ -217,6 +217,10 @@ public class Entry {
         return Config.recycleAnimationsEnabled;
     }
 
+    public static boolean vibrationEnabled() {
+        return Config.vibration;
+    }
+
     public static SimpleDateFormat CommsAdapter_getDateFormat() {
         switch (Config.chatTimeFormat) {
             case 0:  return tf12;
