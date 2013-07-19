@@ -247,7 +247,7 @@ def main():
     edit.find_line('.*invoke-interface \{.*\}, Lcom/badlogic/gdx/Input;->vibrate\(I\)V.*', where='down')
     edit.prepare_to_insert_before()
     edit.add_invoke_entry('vibrationEnabled', ret='v9')
-    edit.add_line(' if-nez v10, :lbl_vibration_disabled')
+    edit.add_line(' if-nez v9, :lbl_vibration_disabled')
     edit.curr += 2;
     edit.add_line(' :lbl_vibration_disabled')
     edit.save()
