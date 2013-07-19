@@ -3,7 +3,7 @@ Ingress "broot" mod
 
 It's a modification of official Ingress app for Android. It works by patching apk file, project sources don't contain any prioprietary bits of NianticLabs.
 
-Unfortunately it's not that easy to build it from sources, because it was developed as a set of helper scripts and it depends highly on an environment and many additional tools. For this reason at this moment it's not recommended for regular users. It's for developers. If you aren't one then search for already built apks in the internet.
+Unfortunately it's not that easy to build it from sources, because it was developed as a set of helper scripts and it depends highly on an environment and many additional tools. For this reason at this moment it's not recommended for regular users. It's for developers. If you aren't one then search for already built apks on my site: http://ingress-apk-mod.o4kapuk.info/
 
 Features
 --------
