@@ -239,15 +239,14 @@ def main():
     edit.add_line(' :lbl_recycle_delay')
     edit.save()
 
-    # disable vibration
-    edit = edit_cls('WidgetCarousel')
-    edit.find_method_def('scroll')
-    edit.find_line(' \.locals 9', where='down')
-    edit.replace_in_line('9', '10')
-    edit.find_line('.*invoke-interface \{.*\}, Lcom/badlogic/gdx/Input;->vibrate\(I\)V.*', where='down')
+    edit = edit_cls('AndroidInput')
+    edit.find_method_def('vibrateInt')
+    edit.find_line(' \.locals 3', where='down')
+    edit.replace_in_line('3', '4')
+    edit.find_line('.*invoke-virtual \{.*\}, Landroid/os/Vibrator;->vibrate\(J\)V.*', where='down')
     edit.prepare_to_insert_before()
-    edit.add_invoke_entry('vibrationEnabled', ret='v9')
-    edit.add_line(' if-nez v9, :lbl_vibration_disabled')
+    edit.add_invoke_entry('vibrationEnabled', ret='v3')
+    edit.add_line(' if-eqz v3, :lbl_vibration_disabled')
     edit.curr += 2;
     edit.add_line(' :lbl_vibration_disabled')
     edit.save()
