@@ -588,6 +588,11 @@ com.badlogic.gdx.scenes.scene2d.Stage:
 com.badlogic.gdx.ApplicationListener:
   is_real_name: true
 
+com.badlogic.gdx.backends.android.AndroidInput:
+  methods:
+    vibrateInt: [vibrate, V, I]
+  is_real_name: true
+
 com.esotericsoftware.tablelayout.Cell:
   obf_name: com.a.a.c
 
