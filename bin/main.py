@@ -20,7 +20,7 @@ def main():
     edit.save()
 
     edit = edit_cls('NemesisWorld')
-    edit.find_line(r' const-string/jumbo ([vp]\d+), "NemesisWorld.init"')
+    edit.find_line(r' new-array ([vp]\d+), ([vp]\d+), \[%s' % expr_type('$BaseSubActivity'))
     edit.find_line(r' return-void', where='down')
     edit.prepare_to_insert_before(True)
     edit.add_line(' move-object/from16 v0, p0')
@@ -107,12 +107,17 @@ def main():
 
     edit.find_line(r' .+"Owner: "')
     edit.find_line(
-        r' invoke-virtual \{([pv]\d+), [pv]\d+\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+',
+        r' invoke-virtual \{([pv]\d+), ([pv]\d+)\}, Lcom/a/a/c;->b\(Ljava/lang/Integer;\)L.+;',
+        where='down')
+    edit.comment_line()
+    edit.find_line(
+        r' invoke-virtual \{([pv]\d+)\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->row\(\)L.+;',
+        where='down')
+    edit.comment_line()
+    edit.find_line(
+        r' return-object ([pv]\d+)',
         where='down')
     tab = edit.vars[0]
-    edit.find_line(
-        r' invoke-virtual \{[pv]\d+, %s\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+' % tab,
-        where='down')
     edit.prepare_to_insert_before()
     edit.add_invoke_entry('PortalInfoDialog_onStatsTableCreated', 'p0, %s' % tab)
 
@@ -143,7 +148,7 @@ def main():
 
     edit = edit_cls('ZoomInMode')
     edit.find_method_def('onEnter')
-    edit.find_line(r' iput-object [pv]\d+, p0, %s->f.+' % expr_type('$ZoomInMode'))
+    edit.find_line(r' iput-object [pv]\d+, p0, %s->g.+' % expr_type('$ZoomInMode'))
     edit.prepare_to_insert()
     edit.add_invoke_entry('ZoomInMode_shouldZoomIn', '', 'v0')
     edit.add_ret_if_result(False)
@@ -214,6 +219,38 @@ def main():
     edit.add_invoke_entry('ShaderUtils_compileShader', 'p0, p1, p2', shaderReg)
     edit.save()
 
+    edit = edit_cls('CommsAdapter')
+    edit.prepare_after_prologue('bindView')
+    edit.find_line(r' iget-object v3, p0, %s->l:%s' % (expr('$CommsAdapter'), expr('$SimpleDateFormat')))
+    edit.comment_line()
+    edit.add_invoke_entry('CommsAdapter_getDateFormat', '', 'v3')
+    edit.save()
+
+    #remove recycle animation
+    edit = edit_cls('ItemActionHandler')
+    edit.find_method_def('recycle')
+    edit.find_line(' \.locals 4', where='down')
+    edit.replace_in_line('4', '5')
+    edit.find_line(' const-wide/16 v2, 0x4b0', where='down')
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ItemActionHandler_recycleAnimationsEnabled', ret='v4')
+    edit.add_line(' if-nez v4, :lbl_recycle_delay');
+    edit.add_line(' const-wide/16 v2, 0x0')
+    edit.add_line(' :lbl_recycle_delay')
+    edit.save()
+
+    # disable vibration
+    edit = edit_cls('AndroidInput')
+    edit.find_method_def('vibrateInt')
+    edit.find_line(' \.locals 3', where='down')
+    edit.replace_in_line('3', '4')
+    edit.find_line('.*invoke-virtual \{.*\}, Landroid/os/Vibrator;->vibrate\(J\)V.*', where='down')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('vibrationEnabled', ret='v3')
+    edit.add_line(' if-eqz v3, :lbl_vibration_disabled')
+    edit.curr += 2;
+    edit.add_line(' :lbl_vibration_disabled')
+    edit.save()
 
 if __name__ == '__main__':
     main()

@@ -122,6 +122,13 @@ public class AboutModActivity extends BaseSubActivity {
                         updateAnimsValues(true);
                     }
                 });
+                animsItem.addButton("Recycle animation", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.recycleAnimationsEnabled = !Config.recycleAnimationsEnabled;
+                        updateAnimsValues(true);
+                    }
+                });
                 addItem(animsItem);
 
                 uiTweaksItem = new ListItem(skin, "UI tweaks", null);
@@ -160,6 +167,21 @@ public class AboutModActivity extends BaseSubActivity {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         Config.simplifyInventoryItems = !Config.simplifyInventoryItems;
+                        updateUiTweaksValues(true);
+                    }
+                });
+                uiTweaksItem.addButton("Chat time format", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.chatTimeFormat = (Config.chatTimeFormat + 1) % 3;
+                        updateUiTweaksValues(true);
+                        restartItem.descLabel.setText("Restart is recommended");
+                    }
+                });
+                uiTweaksItem.addButton("Vibrate", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.vibration = !Config.vibration;
                         updateUiTweaksValues(true);
                     }
                 });
@@ -248,9 +270,11 @@ public class AboutModActivity extends BaseSubActivity {
         animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
         animsItem.buttons.get(2).setText(Config.newHackAnimEnabled ? "ON" : "OFF");
         animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(4).setText(Config.recycleAnimationsEnabled ? "ON" : "OFF");
     }
 
     private void updateUiTweaksValues(boolean save) {
+        String timeFormatLabel;
         if (save) {
             Config.save();
         }
@@ -259,6 +283,13 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
+        switch (Config.chatTimeFormat) {
+            case 0:  timeFormatLabel = "12:00 AM"; break;
+            case 1:  timeFormatLabel = "00:00:00"; break;
+            default:  timeFormatLabel = "00:00"; break;
+        }
+        uiTweaksItem.buttons.get(5).setText(timeFormatLabel);
+        uiTweaksItem.buttons.get(6).setText(Config.vibration ? "ON" : "OFF");
     }
 
     private void updateUiVariantValue() {
