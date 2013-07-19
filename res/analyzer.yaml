@@ -37,6 +37,7 @@ broot.ingress.mod.Entry:
     getClientTypeForJackson: [null, $ClientType]
     shouldSkipIntro: [null, Z]
     shouldDrawScannerObject: [null, Z]
+    vibrationEnabled: [null, Z]
 
     CommsAdapter_getDateFormat: [null, $SimpleDateFormat]
 
@@ -350,6 +351,11 @@ com.nianticproject.ingress.common.ui.widget.MenuTopWidget:
 com.nianticproject.ingress.common.ui.widget.MenuScrollLabel:
   find_by_super: Lcom/nianticproject/ingress/common/ui/widget/ScrollLabel;
 
+com.nianticproject.ingress.common.ui.widget.WidgetCarousel:
+  methods:
+    scroll: [act, V, F]
+  is_real_name: true
+
 ### SCANNER
 
 com.nianticproject.ingress.common.scanner.ScannerActivity:
@@ -580,6 +586,11 @@ com.badlogic.gdx.scenes.scene2d.Stage:
   is_real_name: true
 
 com.badlogic.gdx.ApplicationListener:
+  is_real_name: true
+
+com.badlogic.gdx.backends.android.AndroidInput:
+  methods:
+    vibrateInt: [vibrate, V, I]
   is_real_name: true
 
 com.esotericsoftware.tablelayout.Cell:

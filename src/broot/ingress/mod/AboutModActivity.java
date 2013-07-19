@@ -178,6 +178,13 @@ public class AboutModActivity extends BaseSubActivity {
                         restartItem.descLabel.setText("Restart is recommended");
                     }
                 });
+                uiTweaksItem.addButton("Vibrate", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.vibration = !Config.vibration;
+                        updateUiTweaksValues(true);
+                    }
+                });
                 addItem(uiTweaksItem);
 
                 addItem(uiVariantItem = new ListItem(skin, "UI variant", "", "Toggle", new ClickListener() {
@@ -282,6 +289,7 @@ public class AboutModActivity extends BaseSubActivity {
             default:  timeFormatLabel = "00:00"; break;
         }
         uiTweaksItem.buttons.get(5).setText(timeFormatLabel);
+        uiTweaksItem.buttons.get(6).setText(Config.vibration ? "ON" : "OFF");
     }
 
     private void updateUiVariantValue() {
