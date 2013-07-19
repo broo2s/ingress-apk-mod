@@ -239,6 +239,7 @@ def main():
     edit.add_line(' :lbl_recycle_delay')
     edit.save()
 
+    # disable vibration
     edit = edit_cls('AndroidInput')
     edit.find_method_def('vibrateInt')
     edit.find_line(' \.locals 3', where='down')
