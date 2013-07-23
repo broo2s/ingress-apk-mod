@@ -30,14 +30,24 @@ import com.nianticproject.ingress.gameentity.components.LocationE6;
 import com.nianticproject.ingress.shared.ClientType;
 import com.nianticproject.ingress.shared.location.LocationUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import android.os.PowerManager;
+
 public class Entry {
 
     private static Label portalInfoDistLabel;
+    
+    private static SimpleDateFormat tf12 = new SimpleDateFormat("h:mma");
+    private static SimpleDateFormat tf24 = new SimpleDateFormat("HH:mm:ss");
+    private static SimpleDateFormat tf24ns = new SimpleDateFormat("HH:mm");
+
+    private static PowerManager.WakeLock wl;
+    private static boolean wakeLockActive;
 
     static {
         Mod.init();
@@ -53,6 +63,27 @@ public class Entry {
     public static void NemesisActivity_onOnCreate(NemesisActivity activity) {
         Mod.nemesisActivity = activity;
         Mod.updateFullscreenMode();
+        if (Config.keepScreenOn) {
+            PowerManager pm = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
+            wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+            wakeLockActive = true;
+
+        } else {
+            wakeLockActive = false;
+        }
+        
+    }
+
+    public static void NemesisActivity_onOnPause(NemesisActivity activity) {
+        if (wakeLockActive) {
+            wl.release();
+        }
+    }
+
+    public static void NemesisActivity_onOnResume(NemesisActivity activity) {
+        if (wakeLockActive) {
+            wl.acquire();
+        }
     }
 
     public static void NemesisWorld_onInit(NemesisWorld world) {
@@ -206,5 +237,21 @@ public class Entry {
 
     public static boolean shouldDrawScannerObject() {
         return Config.scannerObjectsEnabled;
+    }
+
+    public static boolean ItemActionHandler_recycleAnimationsEnabled() {
+        return Config.recycleAnimationsEnabled;
+    }
+
+    public static boolean vibrationEnabled() {
+        return Config.vibration;
+    }
+
+    public static SimpleDateFormat CommsAdapter_getDateFormat() {
+        switch (Config.chatTimeFormat) {
+            case 0:  return tf12;
+            case 1:  return tf24;
+            default:  return tf24ns;
+        }
     }
 }

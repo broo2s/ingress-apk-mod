@@ -20,6 +20,7 @@ public class Config {
     public static boolean scannerZoomInAnimEnabled;
     public static boolean newHackAnimEnabled;
     public static boolean rotateInventoryItemsEnabled;
+    public static boolean recycleAnimationsEnabled;
 
     public static boolean fullscreen;
     public static boolean showPortalVectors;
@@ -27,6 +28,9 @@ public class Config {
     public static boolean xmGlobsEnabled;
     public static boolean scannerObjectsEnabled;
     public static boolean simplifyInventoryItems;
+    public static int chatTimeFormat;
+    public static boolean vibration;
+    public static boolean keepScreenOn;
 
     public static UiVariant uiVariant;
 
@@ -46,6 +50,7 @@ public class Config {
         scannerZoomInAnimEnabled = prefs.getBoolean("scannerZoomInAnimEnabled", true);
         newHackAnimEnabled = prefs.getBoolean("newHackAnimEnabled", true);
         rotateInventoryItemsEnabled = prefs.getBoolean("rotateInventoryItemsEnabled", true);
+        recycleAnimationsEnabled = prefs.getBoolean("recycleAnimationsEnabled", true);
 
         fullscreen = prefs.getBoolean("fullscreen", false);
         showPortalVectors = prefs.getBoolean("showPortalVectors", true);
@@ -53,6 +58,9 @@ public class Config {
         xmGlobsEnabled = prefs.getBoolean("xmGlobsEnabled", true);
         scannerObjectsEnabled = prefs.getBoolean("scannerObjectsEnabled", true);
         simplifyInventoryItems = prefs.getBoolean("simplifyInventoryItems", false);
+        chatTimeFormat = prefs.getInt("chatTimeFormat", 0);
+        vibration = prefs.getBoolean("vibration", true);
+        keepScreenOn = prefs.getBoolean("keepScreenOn", false);
 
         uiVariant = UiVariant.byName.get(prefs.getString("uiVariant", "auto"));
         if (uiVariant == null) {
@@ -78,13 +86,17 @@ public class Config {
         e.putBoolean("scannerZoomInAnimEnabled", scannerZoomInAnimEnabled);
         e.putBoolean("newHackAnimEnabled", newHackAnimEnabled);
         e.putBoolean("rotateInventoryItemsEnabled", rotateInventoryItemsEnabled);
+        e.putBoolean("recycleAnimationsEnabled", recycleAnimationsEnabled);
 
         e.putBoolean("fullscreen", fullscreen);
         e.putBoolean("showPortalVectors", showPortalVectors);
         e.putBoolean("portalParticlesEnabled", portalParticlesEnabled);
         e.putBoolean("xmGlobsEnabled", xmGlobsEnabled);
         e.putBoolean("scannerObjectsEnabled", scannerObjectsEnabled);
-        e.putBoolean("simplifyInventoryItems", scannerObjectsEnabled);
+        e.putBoolean("simplifyInventoryItems", simplifyInventoryItems);
+        e.putInt("chatTimeFormat", chatTimeFormat);
+        e.putBoolean("vibration", vibration);
+        e.putBoolean("keepScreenOn", keepScreenOn);
 
         e.putString("uiVariant", uiVariant.name);
 
