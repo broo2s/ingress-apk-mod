@@ -6,6 +6,8 @@ broot.ingress.mod.Entry:
   methods:
     NemesisApp_onOnCreate: [null, V, Landroid/app/Application;]
     NemesisActivity_onOnCreate: [null, V, $NemesisActivity]
+    NemesisActivity_onOnPause: [null, V, $NemesisActivity]
+    NemesisActivity_onOnResume: [null, V, $NemesisActivity]
     NemesisWorld_onInit: [null, V, $NemesisWorld]
     SubActivityManager_onInit: [null, V, Ljava/util/List;]
     MenuController_onInit: [null, V, $MenuControllerImpl]
@@ -159,6 +161,8 @@ com.nianticproject.ingress.NemesisActivity:
 
   methods:
     onCreate: [onCreate, V, Landroid/os/Bundle;]
+    onPause: [onPause, V]
+    onResume: [onResume, V]
 
 com.nianticproject.ingress.common.app.NemesisWorld:
   methods:

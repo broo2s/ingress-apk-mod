@@ -17,6 +17,10 @@ def main():
     edit = edit_cls('NemesisActivity')
     edit.prepare_after_prologue('onCreate')
     edit.add_invoke_entry('NemesisActivity_onOnCreate', 'p0')
+    edit.prepare_after_prologue('onPause')
+    edit.add_invoke_entry('NemesisActivity_onOnPause', 'p0')
+    edit.prepare_after_prologue('onResume')
+    edit.add_invoke_entry('NemesisActivity_onOnResume', 'p0')
     edit.save()
 
     edit = edit_cls('NemesisWorld')
