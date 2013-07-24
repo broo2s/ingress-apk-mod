@@ -252,5 +252,20 @@ def main():
     edit.add_line(' :lbl_vibration_disabled')
     edit.save()
 
+    #change order of buttons in round menu
+    edit = edit_cls('ScannerTouchHandler')
+    edit.find_line(' invoke-direct/range \{v0 \.\. v7\}, (.+)$')
+    edit.prepare_to_insert_before()
+
+    edit.add_invoke_entry('ScannerTouchHandler_shouldSwapTouchMenuButtons', ret='v11')
+    edit.add_line(' if-eqz v11, :noswap')
+    
+    edit.add_line(' move-object v11, v3')
+    edit.add_line(' move-object v3, v6')
+    edit.add_line(' move-object v6, v11')
+
+    edit.add_line(' :noswap')
+    edit.save()
+
 if __name__ == '__main__':
     main()

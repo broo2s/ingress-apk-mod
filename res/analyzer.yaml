@@ -22,6 +22,7 @@ broot.ingress.mod.Entry:
     PortalInfoDialog_onPlayerLocationChanged: [null, V]
     ScannerStateManager_onEnablePortalVectors: [null, Z]
     PlayerModelUtils_onGetDefaultResonatorToDeploy: [null, Ljava/util/Map;, Ljava/util/TreeMap;]
+    ScannerTouchHandler_shouldSwapTouchMenuButtons: [null, Z]
     ZoomInMode_shouldZoomIn: [null, Z]
     PortalInfoDialog_getOpenDelay: [null, F, F]
     PortalUpgrade_onStatsTableCreated: [null, V, $PortalUpgradeUi, $Table]
@@ -383,6 +384,11 @@ com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
 
 com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
   find_by_string: "CLEAR"
+
+com.nianticproject.ingress.common.scanner.modes.ScannerTouchHandler:
+  methods:
+    longPress: [longPress, Z, F, F]
+  find_by_string: '0x415c28f6'
 
 com.nianticproject.ingress.common.scanner.modes.ZoomInMode:
   super: $UiMode

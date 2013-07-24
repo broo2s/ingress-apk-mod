@@ -164,6 +164,10 @@ public class Entry {
     public static int PortalUpgrade_getResonatorBrowserHeight(int withoutPad) {
         return PortalUpgradeMod.getResonatorBrowserHeight(withoutPad);
     }
+    
+    public static boolean ScannerTouchHandler_shouldSwapTouchMenuButtons() {
+        return Config.swapTouchMenuButtons;
+    }
 
     public static boolean ScannerStateManager_onEnablePortalVectors() {
         return Config.showPortalVectors;

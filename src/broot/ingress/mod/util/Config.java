@@ -8,6 +8,7 @@ import java.util.List;
 public class Config {
 
     public static boolean deployHighest;
+    public static boolean swapTouchMenuButtons;
 
     public static ItemsTab itemsTab;
     public static boolean showOrigItemsTab;
@@ -37,6 +38,7 @@ public class Config {
         SharedPreferences prefs = Mod.app.getSharedPreferences("mod", 0);
 
         deployHighest = prefs.getBoolean("deployHighest", false);
+        swapTouchMenuButtons = prefs.getBoolean("swapTouchMenuButtons", false);
 
         itemsTab = ItemsTab.valueOf(prefs.getString("itemsTab", "HIDDEN"));
         showOrigItemsTab = prefs.getBoolean("showOrigItemsTab", true);
@@ -72,6 +74,7 @@ public class Config {
         SharedPreferences.Editor e = Mod.app.getSharedPreferences("mod", 0).edit();
 
         e.putBoolean("deployHighest", deployHighest);
+        e.putBoolean("swapTouchMenuButtons", swapTouchMenuButtons);
 
         e.putString("itemsTab", itemsTab.toString());
         e.putBoolean("showOrigItemsTab", showOrigItemsTab);

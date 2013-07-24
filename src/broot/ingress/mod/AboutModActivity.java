@@ -46,6 +46,13 @@ public class AboutModActivity extends BaseSubActivity {
                         updateGameplayTweaksValues(true);
                     }
                 });
+                gameplayTweaksItem.addButton("TARGET and FIRE", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.swapTouchMenuButtons = !Config.swapTouchMenuButtons;
+                        updateGameplayTweaksValues(true);
+                    }
+                });
                 addItem(gameplayTweaksItem);
 
                 tabsItem = new ListItem(skin, "Menu tabs", null);
@@ -247,6 +254,7 @@ public class AboutModActivity extends BaseSubActivity {
             Config.save();
         }
         gameplayTweaksItem.buttons.get(0).setText(Config.deployHighest ? "Highest" : "Lowest");
+        gameplayTweaksItem.buttons.get(1).setText(Config.swapTouchMenuButtons ? "Swap" : "Leave");
     }
 
     private void updateTabsValues(boolean save) {
