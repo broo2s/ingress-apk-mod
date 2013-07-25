@@ -1,7 +1,7 @@
 -basedirectory ..
 
 -injars build/src
--outjars build/proguard
+-outjars build/proguard.zip
 
 -libraryjars build/ifc
 -libraryjars lib/android.jar

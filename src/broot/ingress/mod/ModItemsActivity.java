@@ -181,10 +181,11 @@ public class ModItemsActivity extends BaseSubActivity {
             Button btn;
             switch (type) {
                 case MEDIA:
-                    int curr = media[lvl]++;
+                    int curr = media[lvl];
                     if (curr == 0) {
                         buttonsByLvl.get(type).get(lvl).entity = items.getEntity();
                     }
+                    media[lvl] += items.getCount();
                     continue;
                 case EMITTER_A:
                 case EMP_BURSTER:
