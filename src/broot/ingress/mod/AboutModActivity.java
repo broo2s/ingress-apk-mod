@@ -197,7 +197,11 @@ public class AboutModActivity extends BaseSubActivity {
                     public void clicked(InputEvent event, float x, float y) {
                         Config.keepScreenOn = !Config.keepScreenOn;
                         updateUiTweaksValues(true);
-                        restartItem.descLabel.setText("Restart is recommended");
+                        if (Mod.ksoWakeLockActive) {
+                            Mod.updateKeepScreenOn();
+                        } else {
+                            restartItem.descLabel.setText("Restart is recommended");
+                        }
                     }
                 });
                 addItem(uiTweaksItem);

@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.PowerManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import broot.ingress.mod.util.Config;
@@ -39,6 +40,8 @@ public class Mod {
     public static DisplayMetrics displayMetrics;
     public static UiVariant currUiVariant;
 
+    public static PowerManager.WakeLock ksoWakeLock;
+    public static boolean ksoWakeLockActive;
 
     public static void init() {
 //        Debug.waitForDebugger();
@@ -60,6 +63,21 @@ public class Mod {
                     attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
                 }
                 nemesisActivity.getWindow().setAttributes(attrs);
+            }
+        });
+    }
+
+    public static void updateKeepScreenOn() {
+        nemesisActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (ksoWakeLockActive) {
+                    if (Config.keepScreenOn) {
+                        ksoWakeLock.acquire();
+                    } else {
+                        ksoWakeLock.release();
+                    }
+                }
             }
         });
     }
