@@ -41,7 +41,6 @@ public class Mod {
     public static UiVariant currUiVariant;
 
     public static PowerManager.WakeLock ksoWakeLock;
-    public static boolean ksoWakeLockActive;
 
     public static void init() {
 //        Debug.waitForDebugger();
@@ -71,10 +70,12 @@ public class Mod {
         nemesisActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (ksoWakeLockActive) {
-                    if (Config.keepScreenOn) {
+                if (Config.keepScreenOn) {
+                    if (!ksoWakeLock.isHeld()) {
                         ksoWakeLock.acquire();
-                    } else {
+                    }
+                } else {
+                    if (ksoWakeLock.isHeld()) {
                         ksoWakeLock.release();
                     }
                 }

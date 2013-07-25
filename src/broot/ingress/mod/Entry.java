@@ -57,22 +57,17 @@ public class Entry {
     }
 
     public static void NemesisActivity_onOnCreate(NemesisActivity activity) {
+        PowerManager pm;
         Mod.nemesisActivity = activity;
         Mod.updateFullscreenMode();
-        if (Config.keepScreenOn) {
-            PowerManager pm = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
-            Mod.ksoWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "Ingress - Keep Screen ON");
-            Mod.ksoWakeLockActive = true;
-
-        } else {
-            Mod.ksoWakeLockActive = false;
-        }
-        
+        pm = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
+        Mod.ksoWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "Ingress - Keep Screen ON");
+        Mod.updateKeepScreenOn();
     }
 
     public static void NemesisActivity_onOnPause(NemesisActivity activity) {
         if (Config.keepScreenOn) {
-            if (Mod.ksoWakeLockActive) {
+            if (Mod.ksoWakeLock.isHeld()) {
                 Mod.ksoWakeLock.release();
             }
         }
@@ -80,7 +75,7 @@ public class Entry {
 
     public static void NemesisActivity_onOnResume(NemesisActivity activity) {
         if (Config.keepScreenOn) {
-            if (Mod.ksoWakeLockActive) {
+            if (!Mod.ksoWakeLock.isHeld()) {
                 Mod.ksoWakeLock.acquire();
             }
         }
