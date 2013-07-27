@@ -161,12 +161,12 @@ public class ModItemsActivity extends BaseSubActivity {
     private void updateLabels() {
         for (List<Button> buttons : buttonsByLvl.values()) {
             for (Button btn : buttons) {
-                btn.button.setText("0");
+                btn.button.setText("-");
             }
         }
         for (Map<ItemRarity, Button> buttons : buttonsByRarity.values()) {
             for (Button btn : buttons.values()) {
-                btn.button.setText("0");
+                btn.button.setText("-");
             }
         }
 
