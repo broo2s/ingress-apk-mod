@@ -218,7 +218,7 @@ public class ModItemsActivity extends BaseSubActivity {
             }
         }
         for (int lvl = 0; lvl < 8; lvl++) {
-            buttonsByLvl.get(ItemType.MEDIA).get(lvl).button.setText(String.valueOf(media[lvl]));
+            buttonsByLvl.get(ItemType.MEDIA).get(lvl).button.setText(media[lvl]==0?"-":String.valueOf(media[lvl]));
         }
         sumLabel.setText("Number of all items: " + sum + " / 2000");
         keysLabel.setText("Keys:  " + keysNumber);
