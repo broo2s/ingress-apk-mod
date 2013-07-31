@@ -195,7 +195,7 @@ public class Entry {
     }
 
     public static Map PlayerModelUtils_onGetDefaultResonatorToDeploy(TreeMap map) {
-        return Config.deployHighest ? map.descendingMap() : map;
+        return Config.deployBehavior == Config.DeployBehavior.HIGHEST ? map.descendingMap() : map;
     }
 
     public static boolean ZoomInMode_shouldZoomIn() {
@@ -208,6 +208,10 @@ public class Entry {
 
     public static boolean ClientFeatureKnobBundle_getEnableNewHackAnimations(boolean orig) {
         return orig && Config.newHackAnimEnabled;
+    }
+
+    public static boolean ClientFeatureKnobBundle_getEnableNewDeployUi(boolean orig) {
+        return orig && Config.deployBehavior == Config.DeployBehavior.MANUAL;
     }
 
     public static boolean InventoryItemRenderer_shouldRotate() {
