@@ -18,13 +18,14 @@ Features
     - disable portal particles (XM "fountain" above portals)
     - disable inventory items rotation and rendering
     - revert to old hack anim
+    - revert to old deploy behavior (auto highest to lowest and lowest to highest)
     - disable recycle animation
     - change time format in chat
 - real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
 - keys number on portal info screen
 - option to hide unwanted menu tabs
-- option to deploy resonators from highest to lowest
 - fullscreen mode
+- screen-always-on mode
 
 Other features:
 
@@ -35,6 +36,18 @@ Other features:
 
 News
 ----
+
+1.08.2013 - **v1.32.1-broot-1.0.2 has been released!**
+
+Changes from 1.0.1:
+
+- Migrated to 1.32.1
+- Added option to keep screen always on. Thank you, @dege88!
+- Added option to disable ingame vibration. Thank you, @onovy and @dege88!
+- Resurrected low-res skins. Thank you, @ZsBT!
+- Added option to revert to old deployment process
+- Added hack type with new transparent window but without slow animation
+- Some other minor improvements
 
 18.07.2013 - **v1.31.1-broot-1.0.1 has been released!**
 
