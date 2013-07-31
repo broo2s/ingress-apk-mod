@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Config {
 
-    public static boolean deployHighest;
+    public static DeployBehavior deployBehavior;
     public static boolean swapTouchMenuButtons;
 
     public static ItemsTab itemsTab;
@@ -38,7 +38,7 @@ public class Config {
     public static void load() {
         SharedPreferences prefs = Mod.app.getSharedPreferences("mod", 0);
 
-        deployHighest = prefs.getBoolean("deployHighest", false);
+        deployBehavior = DeployBehavior.valueOf(prefs.getString("deployBehavior", "MANUAL"));
         swapTouchMenuButtons = prefs.getBoolean("swapTouchMenuButtons", false);
 
         itemsTab = ItemsTab.valueOf(prefs.getString("itemsTab", "HIDDEN"));
@@ -75,7 +75,7 @@ public class Config {
     public static void save() {
         SharedPreferences.Editor e = Mod.app.getSharedPreferences("mod", 0).edit();
 
-        e.putBoolean("deployHighest", deployHighest);
+        e.putString("deployBehavior", deployBehavior.toString());
         e.putBoolean("swapTouchMenuButtons", swapTouchMenuButtons);
 
         e.putString("itemsTab", itemsTab.toString());
@@ -110,6 +110,11 @@ public class Config {
         itemsTab = ItemsTab.values()[(itemsTab.ordinal() + 1) % ItemsTab.values().length];
         save();
     }
+    
+    public static void nextDeployBehavior() {
+        deployBehavior = DeployBehavior.values()[(deployBehavior.ordinal() + 1) % DeployBehavior.values().length];
+        save();
+    }
 
     public static void nextUiVariant() {
         List<UiVariant> variants = UiVariant.variants;
@@ -126,6 +131,19 @@ public class Config {
         public final String desc;
 
         private ItemsTab(String desc) {
+            this.desc = desc;
+        }
+    }
+    
+    public static enum DeployBehavior {
+        MANUAL("Manual"),
+        HIGHEST("Highest"),
+        LOWEST("Lowest"),
+        ;
+
+        public final String desc;
+
+        private DeployBehavior(String desc) {
             this.desc = desc;
         }
     }

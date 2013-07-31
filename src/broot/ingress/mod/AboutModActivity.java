@@ -39,10 +39,10 @@ public class AboutModActivity extends BaseSubActivity {
                 menuItemsTable.top().pad(10);
 
                 gameplayTweaksItem = new ListItem(skin, "Gameplay tweaks", null);
-                gameplayTweaksItem.addButton("Default resonator", "", new ClickListener() {
+                gameplayTweaksItem.addButton("Deployment type", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.deployHighest = !Config.deployHighest;
+                        Config.nextDeployBehavior();
                         updateGameplayTweaksValues(true);
                     }
                 });
@@ -261,7 +261,7 @@ public class AboutModActivity extends BaseSubActivity {
         if (save) {
             Config.save();
         }
-        gameplayTweaksItem.buttons.get(0).setText(Config.deployHighest ? "Highest" : "Lowest");
+        gameplayTweaksItem.buttons.get(0).setText(Config.deployBehavior.desc);
         gameplayTweaksItem.buttons.get(1).setText(Config.swapTouchMenuButtons ? "Swap" : "Leave");
     }
 
