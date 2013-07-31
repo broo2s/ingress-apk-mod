@@ -389,6 +389,11 @@ com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
 com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
   find_by_string: "CLEAR"
 
+com.nianticproject.ingress.common.scanner.render.AcquiredItemsVisuals:
+  methods:
+    animationsIsDone: [a, Z, F]
+  find_by_string: '"HackController.getItems"'
+
 com.nianticproject.ingress.common.scanner.modes.ScannerTouchHandler:
   methods:
     longPress: [longPress, Z, F, F]

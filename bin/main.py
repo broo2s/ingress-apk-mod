@@ -194,6 +194,17 @@ def main():
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewHackAnimations', 'v0', 'v0')
     edit.save()
 
+    edit = edit_cls('AcquiredItemsVisuals')
+    edit.find_line(r' const-string/jumbo v1, " acquired"')
+    edit.find_prologue(where="up")
+    edit.prepare_to_insert()
+    edit.add_line(' return-void')
+    edit.prepare_after_prologue('animationsIsDone')
+    edit.add_line(' const/4 v0, 0x0');
+    edit.add_line(' return v0');
+    edit.save()
+
+
     #stop inventory item rotation
     edit = edit_cls('InventoryItemRenderer')
     edit.prepare_after_prologue('rotate')
