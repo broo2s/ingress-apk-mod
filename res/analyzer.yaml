@@ -140,6 +140,7 @@ com.nianticproject.ingress.shared.location.LocationUtils:
 com.nianticproject.ingress.knobs.ClientFeatureKnobBundle:
   fields:
     enableNewHackAnimations: [enableNewHackAnimations, Z]
+    enableNewDeployUi: [enableNewDeployUi, Z]
 
   is_real_name: true
 
@@ -295,7 +296,7 @@ com.nianticproject.ingress.common.ui.SubActivityManager:
 com.nianticproject.ingress.common.ui.BaseSubActivity:
   methods:
     getName: [d, $String]
-    getRenderer: [H, $UiRenderer]
+    getRenderer: [J, $UiRenderer]
     onResume: [a, V]
     onPause: [e, V]
 
@@ -392,7 +393,7 @@ com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
 com.nianticproject.ingress.common.scanner.modes.ScannerTouchHandler:
   methods:
     longPress: [longPress, Z, F, F]
-  find_by_string: '0x415c28f6'
+  find_by_string: '0x3ea3d70a'
 
 com.nianticproject.ingress.common.scanner.modes.ZoomInMode:
   super: $UiMode
@@ -406,10 +407,10 @@ com.nianticproject.ingress.common.ui.elements.PortalInfoDialog:
   super: $UiLayer
 
   fields:
-    portalComponent: [s, Lcom/nianticproject/ingress/gameentity/components/Portal;]
+    portalComponent: [t, Lcom/nianticproject/ingress/gameentity/components/Portal;]
 
   methods:
-    onPlayerLocationChanged: [q, V]
+    onPlayerLocationChanged: [m, V]
 
   find_by_string: "Unknown Portal"
 
@@ -433,7 +434,9 @@ com.nianticproject.ingress.common.upgrade.PortalUpgradeUi:
   super: $UiLayer
   fields:
     activity: [a, $PortalUpgradeActivity]
-  find_by_string: portal-details-stats
+  find:
+    - [by_string, false, true, portal-details-stats]
+    - [by_string, false, true, '"Range: "']
 
 com.nianticproject.ingress.common.upgrade.ResonatorBrowser:
   find_by_string: resonatorBrowser
