@@ -19,7 +19,7 @@ public class Config {
 
     public static boolean skipIntro;
     public static boolean scannerZoomInAnimEnabled;
-    public static boolean newHackAnimEnabled;
+    public static HackType hackType;
     public static boolean rotateInventoryItemsEnabled;
     public static boolean recycleAnimationsEnabled;
 
@@ -50,7 +50,7 @@ public class Config {
 
         skipIntro = prefs.getBoolean("skipIntro", false);
         scannerZoomInAnimEnabled = prefs.getBoolean("scannerZoomInAnimEnabled", true);
-        newHackAnimEnabled = prefs.getBoolean("newHackAnimEnabled", true);
+        hackType = HackType.valueOf(prefs.getString("hackType", "ANIMATED"));
         rotateInventoryItemsEnabled = prefs.getBoolean("rotateInventoryItemsEnabled", true);
         recycleAnimationsEnabled = prefs.getBoolean("recycleAnimationsEnabled", true);
 
@@ -87,7 +87,7 @@ public class Config {
 
         e.putBoolean("skipIntro", skipIntro);
         e.putBoolean("scannerZoomInAnimEnabled", scannerZoomInAnimEnabled);
-        e.putBoolean("newHackAnimEnabled", newHackAnimEnabled);
+        e.putString("hackType", hackType.toString());
         e.putBoolean("rotateInventoryItemsEnabled", rotateInventoryItemsEnabled);
         e.putBoolean("recycleAnimationsEnabled", recycleAnimationsEnabled);
 
@@ -113,6 +113,11 @@ public class Config {
     
     public static void nextDeployBehavior() {
         deployBehavior = DeployBehavior.values()[(deployBehavior.ordinal() + 1) % DeployBehavior.values().length];
+        save();
+    }
+    
+    public static void nextHackType() {
+        hackType = HackType.values()[(hackType.ordinal() + 1) % HackType.values().length];
         save();
     }
 
@@ -144,6 +149,19 @@ public class Config {
         public final String desc;
 
         private DeployBehavior(String desc) {
+            this.desc = desc;
+        }
+    }
+    
+    public static enum HackType {
+        ANIMATED("Animated"),
+        FAST("Fast"),
+        SIMPLE("Simple"),
+        ;
+        
+        public final String desc;
+
+        private HackType(String desc) {
             this.desc = desc;
         }
     }

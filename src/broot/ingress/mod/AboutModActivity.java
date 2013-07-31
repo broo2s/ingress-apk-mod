@@ -115,10 +115,10 @@ public class AboutModActivity extends BaseSubActivity {
                         updateAnimsValues(true);
                     }
                 });
-                animsItem.addButton("New hacking", "", new ClickListener() {
+                animsItem.addButton("Hacking type", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.newHackAnimEnabled = !Config.newHackAnimEnabled;
+                        Config.nextHackType();
                         updateAnimsValues(true);
                     }
                 });
@@ -284,7 +284,7 @@ public class AboutModActivity extends BaseSubActivity {
         }
         animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
         animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(2).setText(Config.newHackAnimEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(2).setText(Config.hackType.desc);
         animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
         animsItem.buttons.get(4).setText(Config.recycleAnimationsEnabled ? "ON" : "OFF");
     }

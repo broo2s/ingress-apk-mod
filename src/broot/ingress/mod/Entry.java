@@ -207,15 +207,15 @@ public class Entry {
     }
 
     public static boolean ClientFeatureKnobBundle_getEnableNewHackAnimations(boolean orig) {
-        return orig && Config.newHackAnimEnabled;
+        return orig && Config.hackType != Config.HackType.SIMPLE;
     }
     
     public static boolean HackController_shouldShowAnimation() {
-        return false;
+        return Config.hackType == Config.HackType.ANIMATED;
     }
     
     public static float HackAnimationStage_getTotalTime(float orig) {
-        return 0;
+        return Config.hackType == Config.HackType.ANIMATED ? orig : 0;
     }
 
     public static boolean ClientFeatureKnobBundle_getEnableNewDeployUi(boolean orig) {
