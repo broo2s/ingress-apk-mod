@@ -190,14 +190,19 @@ def main():
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewDeployUi', 'v0', 'v0')
     edit.save()
 
-    edit = edit_cls('AcquiredItemsVisuals')
+    edit = edit_cls('HackController')
     edit.find_line(r' const-string/jumbo v1, " acquired"')
     edit.find_prologue(where="up")
     edit.prepare_to_insert()
-    edit.add_line(' return-void')
-    edit.prepare_after_prologue('animationsIsDone')
-    edit.add_line(' const/4 v0, 0x0');
-    edit.add_line(' return v0');
+    edit.add_invoke_entry('HackController_shouldShowAnimation', '', 'v0')
+    edit.add_ret_if_result(False)
+    edit.save()
+    
+    edit = edit_cls('HackAnimationStage')
+    edit.find_method_def('getTotalTime')
+    edit.find_line(r' return ([pv]\d+)')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('HackAnimationStage_getTotalTime', edit.vars[0], edit.vars[0])
     edit.save()
 
 

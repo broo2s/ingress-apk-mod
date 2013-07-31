@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.tablelayout.Value;
-import com.nianticproject.ingress.common.scanner.render.PortalParticleRender;
+import com.nianticproject.ingress.common.scanner.visuals.PortalParticleRender;
 import com.nianticproject.ingress.common.ui.BaseSubActivity;
 import com.nianticproject.ingress.common.ui.UiLayer;
 import com.nianticproject.ingress.common.ui.widget.MenuTabId;

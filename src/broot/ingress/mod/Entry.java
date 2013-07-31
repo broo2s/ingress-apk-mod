@@ -209,6 +209,14 @@ public class Entry {
     public static boolean ClientFeatureKnobBundle_getEnableNewHackAnimations(boolean orig) {
         return orig && Config.newHackAnimEnabled;
     }
+    
+    public static boolean HackController_shouldShowAnimation() {
+        return false;
+    }
+    
+    public static float HackAnimationStage_getTotalTime(float orig) {
+        return 0;
+    }
 
     public static boolean ClientFeatureKnobBundle_getEnableNewDeployUi(boolean orig) {
         return orig && Config.deployBehavior == Config.DeployBehavior.MANUAL;
