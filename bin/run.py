@@ -10,7 +10,7 @@ def main():
         $MOD_HOME/bin/build.py
         adb install -r $MOD_HOME/app/dist/*.apk
 
-        pkg_name=`head -n 1 $MOD_HOME/app/AndroidManifest.xml`; pkg_name=${pkg_name%\"*}; pkg_name=${pkg_name##*\"}
+        pkg_name=`head -n 2 $MOD_HOME/app/AndroidManifest.xml | tail -n 1`; pkg_name=${pkg_name%\"*}; pkg_name=${pkg_name##*\"}
         adb shell am start -n $pkg_name/com.nianticproject.ingress.NemesisActivity
     ''', shell=True)
 

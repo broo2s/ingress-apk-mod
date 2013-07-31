@@ -17,10 +17,14 @@ def main():
     edit = edit_cls('NemesisActivity')
     edit.prepare_after_prologue('onCreate')
     edit.add_invoke_entry('NemesisActivity_onOnCreate', 'p0')
+    edit.prepare_after_prologue('onPause')
+    edit.add_invoke_entry('NemesisActivity_onOnPause', 'p0')
+    edit.prepare_after_prologue('onResume')
+    edit.add_invoke_entry('NemesisActivity_onOnResume', 'p0')
     edit.save()
 
     edit = edit_cls('NemesisWorld')
-    edit.find_line(r' const-string/jumbo ([vp]\d+), "NemesisWorld.init"')
+    edit.find_line(r' new-array ([vp]\d+), ([vp]\d+), \[%s' % expr_type('$BaseSubActivity'))
     edit.find_line(r' return-void', where='down')
     edit.prepare_to_insert_before(True)
     edit.add_line(' move-object/from16 v0, p0')
@@ -107,12 +111,9 @@ def main():
 
     edit.find_line(r' .+"Owner: "')
     edit.find_line(
-        r' invoke-virtual \{([pv]\d+), [pv]\d+\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+',
+        r' return-object ([pv]\d+)',
         where='down')
     tab = edit.vars[0]
-    edit.find_line(
-        r' invoke-virtual \{[pv]\d+, %s\}, Lcom/badlogic/gdx/scenes/scene2d/ui/Table;->add\(Lcom/badlogic/gdx/scenes/scene2d/Actor;\)L.+' % tab,
-        where='down')
     edit.prepare_to_insert_before()
     edit.add_invoke_entry('PortalInfoDialog_onStatsTableCreated', 'p0, %s' % tab)
 
@@ -143,7 +144,7 @@ def main():
 
     edit = edit_cls('ZoomInMode')
     edit.find_method_def('onEnter')
-    edit.find_line(r' iput-object [pv]\d+, p0, %s->f.+' % expr_type('$ZoomInMode'))
+    edit.find_line(r' iput-object [pv]\d+, p0, %s->g.+' % expr_type('$ZoomInMode'))
     edit.prepare_to_insert()
     edit.add_invoke_entry('ZoomInMode_shouldZoomIn', '', 'v0')
     edit.add_ret_if_result(False)
@@ -183,7 +184,27 @@ def main():
     edit.find_line(r' iget-boolean v0, p0, %s' % expr('$ClientFeatureKnobBundle->enableNewHackAnimations'))
     edit.prepare_to_insert()
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewHackAnimations', 'v0', 'v0')
+
+    edit.find_line(r' iget-boolean v0, p0, %s' % expr('$ClientFeatureKnobBundle->enableNewDeployUi'))
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewDeployUi', 'v0', 'v0')
     edit.save()
+
+    edit = edit_cls('HackController')
+    edit.find_line(r' const-string/jumbo v1, " acquired"')
+    edit.find_prologue(where="up")
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('HackController_shouldShowAnimation', '', 'v0')
+    edit.add_ret_if_result(False)
+    edit.save()
+    
+    edit = edit_cls('HackAnimationStage')
+    edit.find_method_def('getTotalTime')
+    edit.find_line(r' return ([pv]\d+)')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('HackAnimationStage_getTotalTime', edit.vars[0], edit.vars[0])
+    edit.save()
+
 
     #stop inventory item rotation
     edit = edit_cls('InventoryItemRenderer')
@@ -214,6 +235,53 @@ def main():
     edit.add_invoke_entry('ShaderUtils_compileShader', 'p0, p1, p2', shaderReg)
     edit.save()
 
+    edit = edit_cls('CommsAdapter')
+    edit.prepare_after_prologue('bindView')
+    edit.find_line(r' iget-object v3, p0, %s->l:%s' % (expr('$CommsAdapter'), expr('$SimpleDateFormat')))
+    edit.comment_line()
+    edit.add_invoke_entry('CommsAdapter_getDateFormat', '', 'v3')
+    edit.save()
+
+    #remove recycle animation
+    edit = edit_cls('ItemActionHandler')
+    edit.find_method_def('recycle')
+    edit.find_line(' \.locals 4', where='down')
+    edit.replace_in_line('4', '5')
+    edit.find_line(' const-wide/16 v2, 0x4b0', where='down')
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('ItemActionHandler_recycleAnimationsEnabled', ret='v4')
+    edit.add_line(' if-nez v4, :lbl_recycle_delay');
+    edit.add_line(' const-wide/16 v2, 0x0')
+    edit.add_line(' :lbl_recycle_delay')
+    edit.save()
+
+    # disable vibration
+    edit = edit_cls('AndroidInput')
+    edit.find_method_def('vibrateInt')
+    edit.find_line(' \.locals 3', where='down')
+    edit.replace_in_line('3', '4')
+    edit.find_line('.*invoke-virtual \{.*\}, Landroid/os/Vibrator;->vibrate\(J\)V.*', where='down')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('vibrationEnabled', ret='v3')
+    edit.add_line(' if-eqz v3, :lbl_vibration_disabled')
+    edit.curr += 2;
+    edit.add_line(' :lbl_vibration_disabled')
+    edit.save()
+
+    #change order of buttons in round menu
+    edit = edit_cls('ScannerTouchHandler')
+    edit.find_line(' invoke-direct/range \{v0 \.\. v7\}, (.+)$')
+    edit.prepare_to_insert_before()
+
+    edit.add_invoke_entry('ScannerTouchHandler_shouldSwapTouchMenuButtons', ret='v11')
+    edit.add_line(' if-eqz v11, :noswap')
+    
+    edit.add_line(' move-object v11, v3')
+    edit.add_line(' move-object v3, v6')
+    edit.add_line(' move-object v6, v11')
+
+    edit.add_line(' :noswap')
+    edit.save()
 
 if __name__ == '__main__':
     main()

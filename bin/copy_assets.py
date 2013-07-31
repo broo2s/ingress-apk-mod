@@ -17,7 +17,8 @@ def copy_assets(names=None):
     for n1 in names:
         dir2 = dir1 + '/' + n1
         for n2 in os.listdir(dir2):
-            shutil.copytree(dir2 + '/' + n2, '%s/app/assets/%s/%s' % (HOME, n2, n1))
+            if os.path.isdir(dir2 + '/' + n2):
+                shutil.copytree(dir2 + '/' + n2, '%s/app/assets/%s/%s' % (HOME, n2, n1))
 
 
 if __name__ == '__main__':
