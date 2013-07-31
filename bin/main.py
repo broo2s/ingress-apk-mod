@@ -190,6 +190,22 @@ def main():
     edit.add_invoke_entry('ClientFeatureKnobBundle_getEnableNewDeployUi', 'v0', 'v0')
     edit.save()
 
+    edit = edit_cls('HackController')
+    edit.find_line(r' const-string/jumbo v1, " acquired"')
+    edit.find_prologue(where="up")
+    edit.prepare_to_insert()
+    edit.add_invoke_entry('HackController_shouldShowAnimation', '', 'v0')
+    edit.add_ret_if_result(False)
+    edit.save()
+    
+    edit = edit_cls('HackAnimationStage')
+    edit.find_method_def('getTotalTime')
+    edit.find_line(r' return ([pv]\d+)')
+    edit.prepare_to_insert_before()
+    edit.add_invoke_entry('HackAnimationStage_getTotalTime', edit.vars[0], edit.vars[0])
+    edit.save()
+
+
     #stop inventory item rotation
     edit = edit_cls('InventoryItemRenderer')
     edit.prepare_after_prologue('rotate')

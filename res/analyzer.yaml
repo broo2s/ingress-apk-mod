@@ -30,6 +30,8 @@ broot.ingress.mod.Entry:
     PortalUpgrade_onStatsTableCreated: [null, V, $PortalUpgradeUi, $Table]
     PortalUpgrade_onDispose: [null, V]
     PortalUpgrade_getResonatorBrowserHeight: [null, I, I]
+    HackAnimationStage_getTotalTime: [null, F, F]
+    HackController_shouldShowAnimation: [null, Z]
     ClientFeatureKnobBundle_getEnableNewHackAnimations: [null, Z, Z]
     ClientFeatureKnobBundle_getEnableNewDeployUi: [null, Z, Z]
     InventoryItemRenderer_shouldRotate: [null, Z]
@@ -373,13 +375,13 @@ com.nianticproject.ingress.common.scanner.ScannerStateManager:
 
   find_by_string: STATE_NO_PORTALS
 
-com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
+com.nianticproject.ingress.common.scanner.visuals.PortalParticleRender:
   fields:
     enabled: [a, Z]
 
   find_by_string: Portal Particle Render
 
-#com.nianticproject.ingress.common.scanner.render.EnergyGlobVisuals:
+#com.nianticproject.ingress.common.scanner.visuals.EnergyGlobVisuals:
 #  fields:
 #    initEnabled: [a, Z]
 #
@@ -388,8 +390,23 @@ com.nianticproject.ingress.common.scanner.render.PortalParticleRender:
 #
 #  find_by_string: '"EnergyGlobVisuals.draw"'
 
-com.nianticproject.ingress.common.scanner.render.ScannerDestinationVisuals:
+com.nianticproject.ingress.common.scanner.visuals.ScannerDestinationVisuals:
   find_by_string: "CLEAR"
+
+com.nianticproject.ingress.common.scanner.visuals.HackController:
+  methods:
+    animationsIsDone: [a, Z, F]
+  find_by_string: '"HackController.getItems"'
+
+com.nianticproject.ingress.common.scanner.visuals.HackAnimationStage:
+  methods:
+    getTotalTime: [a, F]
+
+  find:
+    - [by_string, false, true, '"POPUP"']
+    - [by_string, false, true, '"SPIN"']
+    - [by_string, false, true, '"PAUSE"']
+    - [by_string, false, true, '"DISINTEGRATE"']
 
 com.nianticproject.ingress.common.scanner.modes.ScannerTouchHandler:
   methods:
@@ -404,6 +421,22 @@ com.nianticproject.ingress.common.scanner.modes.PortalDialogMode:
   super: $ZoomInMode
   find_by_string: new-instance [pv]\d+, ${PortalInfoDialog}
 
+#com.nianticproject.ingress.common.scanner.modes.ResourceZoomMode:
+#  super: $BasePlayerListener
+#  methods:
+#    AcquireResource: [a, V, $PlayerLocation]
+
+#  find_by_string: '"ResourceZoomMode:playerListener"'
+
+com.nianticproject.ingress.common.scanner.modes.RepeatedActionUi:
+  super: $UiLayer
+  methods:
+    onPrimaryAction: [a, V]
+    onDone: [b, V]
+  find:
+    - [by_string, false, true, DONE]
+    - [by_string, false, true, primary-action]
+
 com.nianticproject.ingress.common.ui.elements.PortalInfoDialog:
   super: $UiLayer
 
@@ -414,15 +447,6 @@ com.nianticproject.ingress.common.ui.elements.PortalInfoDialog:
     onPlayerLocationChanged: [m, V]
 
   find_by_string: "Unknown Portal"
-
-com.nianticproject.ingress.common.scanner.modes.RepeatedActionUi:
-  super: $UiLayer
-  methods:
-    onPrimaryAction: [a, V]
-    onDone: [b, V]
-  find:
-    - [by_string, false, true, DONE]
-    - [by_string, false, true, primary-action]
 
 ### PORTAL UPGRADE
 
