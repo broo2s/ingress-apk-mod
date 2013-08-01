@@ -12,7 +12,6 @@ Features
 - support for HVGA and QVGA screens
 - muted version of an app - it's a lot smaller
 - UI tweaks:
-    - skip globe intro anim
     - disable scanner zoom in anim - it's GPU consuming and delays portal dialog opening
     - disable vectors to portals
     - disable portal particles (XM "fountain" above portals)
