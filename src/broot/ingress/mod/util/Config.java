@@ -142,8 +142,8 @@ public class Config {
     
     public static enum DeployBehavior {
         MANUAL("Manual"),
-        HIGHEST("Highest"),
-        LOWEST("Lowest"),
+        HIGHEST("Highest first"),
+        LOWEST("Lowest first"),
         ;
 
         public final String desc;
