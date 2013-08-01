@@ -101,13 +101,13 @@ public class AboutModActivity extends BaseSubActivity {
                 addItem(tabsItem);
 
                 animsItem = new ListItem(skin, "Animations", null);
-                animsItem.addButton("Globe intro", "", new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        Config.skipIntro = !Config.skipIntro;
-                        updateAnimsValues(true);
-                    }
-                });
+//                animsItem.addButton("Globe intro", "", new ClickListener() {
+//                    @Override
+//                    public void clicked(InputEvent event, float x, float y) {
+//                        Config.skipIntro = !Config.skipIntro;
+//                        updateAnimsValues(true);
+//                    }
+//                });
                 animsItem.addButton("Scanner zoom in", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -282,11 +282,11 @@ public class AboutModActivity extends BaseSubActivity {
         if (save) {
             Config.save();
         }
-        animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
-        animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(2).setText(Config.hackType.desc);
-        animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(4).setText(Config.recycleAnimationsEnabled ? "ON" : "OFF");
+//        animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
+        animsItem.buttons.get(0).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(1).setText(Config.hackType.desc);
+        animsItem.buttons.get(2).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(3).setText(Config.recycleAnimationsEnabled ? "ON" : "OFF");
     }
 
     private void updateUiTweaksValues(boolean save) {
