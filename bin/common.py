@@ -559,7 +559,7 @@ class ClassEditor:
         self.find_line(r' const/4 v0, 0x(\d+)', where='up')
         old_size = int(self.vars[0], 16)
         new_size = old_size + len(self.enums_to_add)
-        self.replace_in_line('0x%x' % old_size, '0x%x' % new_size)
+        self.replace_in_line('const/4 v0, 0x%x' % old_size, 'const v0, 0x%x' % new_size)
         self.find_line(' return-void', where='down')
         self.curr -= 1
         self.prepare_to_insert(2, 1)

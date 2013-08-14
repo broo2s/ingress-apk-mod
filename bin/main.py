@@ -144,7 +144,7 @@ def main():
 
     edit = edit_cls('ZoomInMode')
     edit.find_method_def('onEnter')
-    edit.find_line(r' iput-object [pv]\d+, p0, %s->g.+' % expr_type('$ZoomInMode'))
+    edit.find_line(r' iput-object [pv]\d+, p0, %s->h.+' % expr_type('$ZoomInMode'))
     edit.prepare_to_insert()
     edit.add_invoke_entry('ZoomInMode_shouldZoomIn', '', 'v0')
     edit.add_ret_if_result(False)
