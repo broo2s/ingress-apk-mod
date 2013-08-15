@@ -210,6 +210,9 @@ com.nianticproject.ingress.common.assets.ScreenDensity:
 com.nianticproject.ingress.common.audio.AudioSystemManager:
   find_by_string: "processAudioTasks:task "
 
+com.nianticproject.ingress.common.audio.SpectrographSoundFinder:
+  find_by_string: '"spectrogaph version incompatible for "'
+
 ### GFX
 
 com.nianticproject.ingress.common.gfx1.GroupDrawer:
@@ -272,6 +275,15 @@ com.nianticproject.ingress.common.ui.FormatUtils:
     formatDistance: [a, $String, F]
 
   find_by_string: '%dkm'
+
+
+
+
+com.nianticproject.ingress.common.ui.widget.Spectrograph:
+  methods:
+    draw: [draw, V, Lcom/badlogic/gdx/graphics/g2d/SpriteBatch;, F]
+
+  is_real_name: true
 
 ### SUB ACTIVIVITY
 

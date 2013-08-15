@@ -16,6 +16,17 @@ def main():
     edit.add_line(' return-void')
     edit.save()
 
+    edit = edit_cls('Spectrograph')
+    edit.prepare_after_prologue('draw')
+    edit.add_line(' return-void')
+    edit.save()
+    
+    edit = edit_cls('SpectrographSoundFinder')
+    edit.find_line(r' invoke-direct \{p0\}, Ljava/lang/Object;->\<init\>\(\)V')
+    edit.prepare_to_insert()
+    edit.add_line(' return-void')
+    edit.save()
+    
 
 if __name__ == '__main__':
     main()
