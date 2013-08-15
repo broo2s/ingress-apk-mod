@@ -175,7 +175,7 @@ public class Entry {
     }
 
     public static void PortalUpgrade_onStatsTableCreated(PortalUpgradeUi ui, Table t) {
-        PortalUpgradeMod.onStatsTableCreated(ui, t);
+//        PortalUpgradeMod.onStatsTableCreated(ui, t);
     }
 
     public static void PortalUpgrade_onDispose() {
