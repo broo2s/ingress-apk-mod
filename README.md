@@ -20,7 +20,7 @@ Features
     - revert to old deploy behavior (auto highest to lowest and lowest to highest)
     - disable recycle animation
     - change time format in chat
-- real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
+- real-time distance to portal on portal info screen - it's good for deploying resonators close to 40m distance
 - keys number on portal info screen
 - option to hide unwanted menu tabs
 - fullscreen mode
@@ -36,7 +36,9 @@ Other features:
 News
 ----
 
-1.08.2013 - **v1.32.1-broot-1.0.2 has been released!**
+15.08.2013 – Migrated to 1.33.0
+
+1.08.2013 – **v1.32.1-broot-1.0.2 has been released!**
 
 Changes from 1.0.1:
 
@@ -48,7 +50,7 @@ Changes from 1.0.1:
 - Added hack type with new transparent window but without slow animation
 - Some other minor improvements
 
-18.07.2013 - **v1.31.1-broot-1.0.1 has been released!**
+18.07.2013 – **v1.31.1-broot-1.0.1 has been released!**
 
 Changes from 1.0.0:
 
@@ -58,7 +60,7 @@ Changes from 1.0.0:
 - Added option to choose time format in chat
 - Some bugs fixed
 
-07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
+07.07.2013 – **v1.30.2-broot-1.0.0 has been released!**
 
 - Initial version
 
