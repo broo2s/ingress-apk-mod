@@ -1,4 +1,4 @@
-package com.nianticproject.ingress.common.scanner.render;
+package com.nianticproject.ingress.common.scanner.visuals;
 
 public class PortalParticleRender {
 

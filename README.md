@@ -3,7 +3,7 @@ Ingress "broot" mod
 
 It's a modification of official Ingress app for Android. It works by patching apk file, project sources don't contain any prioprietary bits of NianticLabs.
 
-Unfortunately it's not that easy to build it from sources, because it was developed as a set of helper scripts and it depends highly on an environment and many additional tools. For this reason at this moment it's not recommended for regular users. It's for developers. If you aren't one then search for already built apks in the internet.
+Unfortunately it's not that easy to build it from sources, because it was developed as a set of helper scripts and it depends highly on an environment and many additional tools. For this reason at this moment it's not recommended for regular users. It's for developers. If you aren't one then search for already built apks on my site: http://ingress-apk-mod.o4kapuk.info/
 
 Features
 --------
@@ -12,16 +12,19 @@ Features
 - support for HVGA and QVGA screens
 - muted version of an app - it's a lot smaller
 - UI tweaks:
-    - skip globe intro anim
     - disable scanner zoom in anim - it's GPU consuming and delays portal dialog opening
     - disable vectors to portals
     - disable portal particles (XM "fountain" above portals)
+    - disable inventory items rotation and rendering
     - revert to old hack anim
-- real-time distance to portal on portal info and portal upgrade screens - it's good for deploying resonators close to 40m distance
+    - revert to old deploy behavior (auto highest to lowest and lowest to highest)
+    - disable recycle animation
+    - change time format in chat
+- real-time distance to portal on portal info screen - it's good for deploying resonators close to 40m distance
 - keys number on portal info screen
 - option to hide unwanted menu tabs
-- option to deploy resonators from highest to lowest
 - fullscreen mode
+- screen-always-on mode
 
 Other features:
 
@@ -33,9 +36,33 @@ Other features:
 News
 ----
 
-07.07.2013 - **v1.30.2-broot-1.0.0 has been released!**
+15.08.2013 – Migrated to 1.33.0
 
-- initial version
+1.08.2013 – **v1.32.1-broot-1.0.2 has been released!**
+
+Changes from 1.0.1:
+
+- Migrated to 1.32.1
+- Added option to keep screen always on. Thank you, @dege88!
+- Added option to disable ingame vibration. Thank you, @onovy and @dege88!
+- Resurrected low-res skins. Thank you, @ZsBT!
+- Added option to revert to old deployment process
+- Added hack type with new transparent window but without slow animation
+- Some other minor improvements
+
+18.07.2013 – **v1.31.1-broot-1.0.1 has been released!**
+
+Changes from 1.0.0:
+
+- Migrated to 1.31.1
+- Added option to disable recycle animation
+- Added option to disable items rotation and rendering
+- Added option to choose time format in chat
+- Some bugs fixed
+
+07.07.2013 – **v1.30.2-broot-1.0.0 has been released!**
+
+- Initial version
 
 
 Quick build instructions
@@ -90,7 +117,7 @@ It depends on multiple jars and command line tools:
 - bash
 - Python3
 - JDK7, java and javac in PATH
-- apktool.jar v2.x
+- apktool.jar v2.x (must be build from sources, see https://github.com/brutall/brut.apktool/tree/wip-2.0)
 - baksmali.jar v1.4.2
 - libgdx v0.9.7: gdx.jar, gdx-natives.jar, gdx-tools.jar, gdx-backend-lwjgl.jar, gdx-backend-lwjgl-natives.jar
 - android.jar from Android SDK

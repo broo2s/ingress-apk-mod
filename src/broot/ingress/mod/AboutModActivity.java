@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.tablelayout.Value;
-import com.nianticproject.ingress.common.scanner.render.PortalParticleRender;
+import com.nianticproject.ingress.common.scanner.visuals.PortalParticleRender;
 import com.nianticproject.ingress.common.ui.BaseSubActivity;
 import com.nianticproject.ingress.common.ui.UiLayer;
 import com.nianticproject.ingress.common.ui.widget.MenuTabId;
@@ -39,10 +39,17 @@ public class AboutModActivity extends BaseSubActivity {
                 menuItemsTable.top().pad(10);
 
                 gameplayTweaksItem = new ListItem(skin, "Gameplay tweaks", null);
-                gameplayTweaksItem.addButton("Default resonator", "", new ClickListener() {
+                gameplayTweaksItem.addButton("Deployment type", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.deployHighest = !Config.deployHighest;
+                        Config.nextDeployBehavior();
+                        updateGameplayTweaksValues(true);
+                    }
+                });
+                gameplayTweaksItem.addButton("TARGET and FIRE", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.swapTouchMenuButtons = !Config.swapTouchMenuButtons;
                         updateGameplayTweaksValues(true);
                     }
                 });
@@ -94,13 +101,13 @@ public class AboutModActivity extends BaseSubActivity {
                 addItem(tabsItem);
 
                 animsItem = new ListItem(skin, "Animations", null);
-                animsItem.addButton("Globe intro", "", new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        Config.skipIntro = !Config.skipIntro;
-                        updateAnimsValues(true);
-                    }
-                });
+//                animsItem.addButton("Globe intro", "", new ClickListener() {
+//                    @Override
+//                    public void clicked(InputEvent event, float x, float y) {
+//                        Config.skipIntro = !Config.skipIntro;
+//                        updateAnimsValues(true);
+//                    }
+//                });
                 animsItem.addButton("Scanner zoom in", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -108,10 +115,10 @@ public class AboutModActivity extends BaseSubActivity {
                         updateAnimsValues(true);
                     }
                 });
-                animsItem.addButton("New hacking", "", new ClickListener() {
+                animsItem.addButton("Hacking type", "", new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Config.newHackAnimEnabled = !Config.newHackAnimEnabled;
+                        Config.nextHackType();
                         updateAnimsValues(true);
                     }
                 });
@@ -119,6 +126,13 @@ public class AboutModActivity extends BaseSubActivity {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         Config.rotateInventoryItemsEnabled = !Config.rotateInventoryItemsEnabled;
+                        updateAnimsValues(true);
+                    }
+                });
+                animsItem.addButton("Recycle animation", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.recycleAnimationsEnabled = !Config.recycleAnimationsEnabled;
                         updateAnimsValues(true);
                     }
                 });
@@ -161,6 +175,29 @@ public class AboutModActivity extends BaseSubActivity {
                     public void clicked(InputEvent event, float x, float y) {
                         Config.simplifyInventoryItems = !Config.simplifyInventoryItems;
                         updateUiTweaksValues(true);
+                    }
+                });
+                uiTweaksItem.addButton("Chat time format", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.chatTimeFormat = (Config.chatTimeFormat + 1) % 3;
+                        updateUiTweaksValues(true);
+                        restartItem.descLabel.setText("Restart is recommended");
+                    }
+                });
+                uiTweaksItem.addButton("Vibrate", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.vibration = !Config.vibration;
+                        updateUiTweaksValues(true);
+                    }
+                });
+                uiTweaksItem.addButton("Keep screen on", "", new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Config.keepScreenOn = !Config.keepScreenOn;
+                        updateUiTweaksValues(true);
+                        Mod.updateKeepScreenOn();
                     }
                 });
                 addItem(uiTweaksItem);
@@ -224,7 +261,8 @@ public class AboutModActivity extends BaseSubActivity {
         if (save) {
             Config.save();
         }
-        gameplayTweaksItem.buttons.get(0).setText(Config.deployHighest ? "Highest" : "Lowest");
+        gameplayTweaksItem.buttons.get(0).setText(Config.deployBehavior.desc);
+        gameplayTweaksItem.buttons.get(1).setText(Config.swapTouchMenuButtons ? "Swap" : "Leave");
     }
 
     private void updateTabsValues(boolean save) {
@@ -244,13 +282,15 @@ public class AboutModActivity extends BaseSubActivity {
         if (save) {
             Config.save();
         }
-        animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
-        animsItem.buttons.get(1).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(2).setText(Config.newHackAnimEnabled ? "ON" : "OFF");
-        animsItem.buttons.get(3).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
+//        animsItem.buttons.get(0).setText(!Config.skipIntro ? "ON" : "OFF");
+        animsItem.buttons.get(0).setText(Config.scannerZoomInAnimEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(1).setText(Config.hackType.desc);
+        animsItem.buttons.get(2).setText(Config.rotateInventoryItemsEnabled ? "ON" : "OFF");
+        animsItem.buttons.get(3).setText(Config.recycleAnimationsEnabled ? "ON" : "OFF");
     }
 
     private void updateUiTweaksValues(boolean save) {
+        String timeFormatLabel;
         if (save) {
             Config.save();
         }
@@ -259,6 +299,14 @@ public class AboutModActivity extends BaseSubActivity {
         uiTweaksItem.buttons.get(2).setText(Config.portalParticlesEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(3).setText(Config.scannerObjectsEnabled ? "ON" : "OFF");
         uiTweaksItem.buttons.get(4).setText(Config.simplifyInventoryItems ? "ON" : "OFF");
+        switch (Config.chatTimeFormat) {
+            case 0:  timeFormatLabel = "12:00 AM"; break;
+            case 1:  timeFormatLabel = "00:00:00"; break;
+            default:  timeFormatLabel = "00:00"; break;
+        }
+        uiTweaksItem.buttons.get(5).setText(timeFormatLabel);
+        uiTweaksItem.buttons.get(6).setText(Config.vibration ? "ON" : "OFF");
+        uiTweaksItem.buttons.get(7).setText(Config.keepScreenOn ? "ON" : "OFF");
     }
 
     private void updateUiVariantValue() {

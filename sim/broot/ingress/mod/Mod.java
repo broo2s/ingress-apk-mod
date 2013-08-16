@@ -24,7 +24,7 @@ public class Mod {
     }
 
     public static String getFullVersion() {
-        return "v1.26.0-broot-" + BuildConfig.MOD_VERSION;
+        return "";
     }
 
     public static void updateFullscreenMode() {
